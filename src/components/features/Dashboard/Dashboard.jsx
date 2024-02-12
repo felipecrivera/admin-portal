@@ -110,79 +110,91 @@ function Dashboard() {
               </div>
 
               <div className="grid gap-5">
-                <div className="rounded-xl bg-secondary/10 p-5">
-                  <div className="flex flex-wrap items-center justify-between gap-2 border-b-[3px] border-secondary/20 pb-2">
-                    <div className="relative flex items-center gap-2 before:absolute before:-bottom-[11px] before:left-0 before:h-[3px] before:w-[calc(100%+.5rem)] before:bg-secondary">
-                      <span className="rounded-lg bg-accent-1 p-1 text-primary">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="currentColor"
-                          viewBox="0 0 18 18"
-                          className="h-5 w-5"
-                        >
-                          <path d="M12.461 6.23v4.155a.692.692 0 1 1-1.384 0V7.902L6.72 12.259a.691.691 0 0 1-1.183-.49.693.693 0 0 1 .203-.49l4.357-4.356H7.615a.692.692 0 1 1 0-1.385h4.154a.693.693 0 0 1 .692.693ZM18 9a9 9 0 1 1-9-9 9.01 9.01 0 0 1 9 9Zm-1.385 0A7.615 7.615 0 1 0 9 16.615 7.625 7.625 0 0 0 16.615 9Z" />
-                        </svg>
-                      </span>
-                      <h6 className="text-base font-medium">Connection Rate</h6>
-                    </div>
+								<div className="rounded-xl bg-secondary/10 p-5">
+									<div className="flex flex-wrap items-center justify-between gap-2 border-b-[3px] border-secondary/20 pb-2">
+										<div className="relative flex items-center gap-2 before:absolute before:-bottom-[11px] before:left-0 before:h-[3px] before:w-[calc(100%+.5rem)] before:bg-secondary">
+											<span className="rounded-lg bg-accent-1 p-1 text-primary">
+												<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" className="h-5 w-5">
+													<path d="M15.133 10.689 11.387 9.01l-.01-.005a1.272 1.272 0 0 0-1.265.156l-1.935 1.65C6.952 10.215 5.686 8.96 5.09 7.75l1.652-1.965a1.272 1.272 0 0 0 .15-1.258v-.01L5.21.768a1.272 1.272 0 0 0-1.32-.76A4.472 4.472 0 0 0 0 4.452c0 6.311 5.135 11.447 11.447 11.447a4.473 4.473 0 0 0 4.442-3.89 1.272 1.272 0 0 0-.756-1.32Zm-3.686 3.938A10.187 10.187 0 0 1 1.272 4.452a3.196 3.196 0 0 1 2.772-3.18v.01l1.67 3.736L4.07 6.984a1.272 1.272 0 0 0-.125 1.31c.72 1.473 2.205 2.945 3.694 3.665a1.274 1.274 0 0 0 1.252-.09.544.544 0 0 0 .058-.046l1.933-1.648 3.736 1.674h.009a3.196 3.196 0 0 1-3.18 2.778ZM8.903 3.816a.636.636 0 0 1 .636-.636h1.908V1.272a.636.636 0 0 1 1.272 0V3.18h1.908a.636.636 0 1 1 0 1.272h-1.908v1.907a.636.636 0 1 1-1.272 0V4.452H9.54a.636.636 0 0 1-.636-.636Z"></path>
+												</svg>
+											</span>
+											<h6 className="text-base font-medium">Reaches</h6>
+										</div>
 
-                    <div className="flex items-center gap-px text-sm font-medium text-primary">
-                      <span className="">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="currentColor"
-                          viewBox="0 0 21 21"
-                          className="h-4 w-4"
-                        >
-                          <path d="M10.072 0a10.072 10.072 0 1 0 10.072 10.072A10.082 10.082 0 0 0 10.072 0Zm0 18.594a8.522 8.522 0 1 1 8.522-8.522 8.532 8.532 0 0 1-8.522 8.522Zm3.647-9.845a.774.774 0 1 1-1.096 1.096l-1.776-1.777v5.877a.775.775 0 1 1-1.55 0V8.069L7.521 9.845A.775.775 0 1 1 6.425 8.75l3.099-3.1a.775.775 0 0 1 1.096 0l3.099 3.1Z" />
-                        </svg>
-                      </span>
-                      <span className=""> +12% </span>
-                    </div>
-                  </div>
+										<div className="flex items-center gap-px text-sm font-medium text-primary">
+											<span className="">
+												<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 21 21" className="h-4 w-4">
+													<path d="M10.072 0a10.072 10.072 0 1 0 10.072 10.072A10.082 10.082 0 0 0 10.072 0Zm0 18.594a8.522 8.522 0 1 1 8.522-8.522 8.532 8.532 0 0 1-8.522 8.522Zm3.647-9.845a.774.774 0 1 1-1.096 1.096l-1.776-1.777v5.877a.775.775 0 1 1-1.55 0V8.069L7.521 9.845A.775.775 0 1 1 6.425 8.75l3.099-3.1a.775.775 0 0 1 1.096 0l3.099 3.1Z"></path>
+												</svg>
+											</span>
+											<span className=""> +3% </span>
+										</div>
+									</div>
 
-                  <div className="px-4 pt-4 lg:px-8">
-                    <h2 className="text-5xl font-medium">60%</h2>
-                  </div>
-                </div>
+									<div className="px-4 pt-3 lg:px-8">
+										<h2 className="text-5xl font-medium">60</h2>
+									</div>
+								</div>
+							</div>
 
-                <div className="rounded-xl bg-secondary/10 p-5">
-                  <div className="flex flex-wrap items-center justify-between gap-2 border-b-[3px] border-secondary/20 pb-2">
-                    <div className="relative flex items-center gap-2 before:absolute before:-bottom-[11px] before:left-0 before:h-[3px] before:w-[calc(100%+.5rem)] before:bg-secondary">
-                      <span className="rounded-lg bg-accent-1 p-1 text-primary">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="currentColor"
-                          viewBox="0 0 16 16"
-                          className="h-5 w-5"
-                        >
-                          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
-                          <path d="m10.97 4.97-.02.022-3.473 4.425-2.093-2.094a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05" />
-                        </svg>
-                      </span>
-                      <h6 className="text-base font-medium">Conversion Rate</h6>
-                    </div>
+              <div className="grid gap-5">
+								<div className="rounded-xl bg-secondary/10 p-5">
+									<div className="flex flex-wrap items-center justify-between gap-2 border-b-[3px] border-secondary/20 pb-2">
+										<div className="relative flex items-center gap-2 before:absolute before:-bottom-[11px] before:left-0 before:h-[3px] before:w-[calc(100%+.5rem)] before:bg-secondary">
+											<span className="rounded-lg bg-accent-1 p-1 text-primary">
+												<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18" className="h-5 w-5">
+													<path d="M12.461 6.23v4.155a.692.692 0 1 1-1.384 0V7.902L6.72 12.259a.691.691 0 0 1-1.183-.49.693.693 0 0 1 .203-.49l4.357-4.356H7.615a.692.692 0 1 1 0-1.385h4.154a.693.693 0 0 1 .692.693ZM18 9a9 9 0 1 1-9-9 9.01 9.01 0 0 1 9 9Zm-1.385 0A7.615 7.615 0 1 0 9 16.615 7.625 7.625 0 0 0 16.615 9Z"></path>
+												</svg>
+											</span>
+											<h6 className="text-base font-medium">
+												Connection Rate
+											</h6>
+										</div>
 
-                    <div className="flex items-center gap-px text-sm font-medium text-primary">
-                      <span className="">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="currentColor"
-                          viewBox="0 0 21 21"
-                          className="h-4 w-4"
-                        >
-                          <path d="M10.072 0a10.072 10.072 0 1 0 10.072 10.072A10.082 10.082 0 0 0 10.072 0Zm0 18.594a8.522 8.522 0 1 1 8.522-8.522 8.532 8.532 0 0 1-8.522 8.522Zm3.647-9.845a.774.774 0 1 1-1.096 1.096l-1.776-1.777v5.877a.775.775 0 1 1-1.55 0V8.069L7.521 9.845A.775.775 0 1 1 6.425 8.75l3.099-3.1a.775.775 0 0 1 1.096 0l3.099 3.1Z" />
-                        </svg>
-                      </span>
-                      <span className=""> +12% </span>
-                    </div>
-                  </div>
+										<div className="flex items-center gap-px text-sm font-medium text-primary">
+											<span className="">
+												<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 21 21" className="h-4 w-4">
+													<path d="M10.072 0a10.072 10.072 0 1 0 10.072 10.072A10.082 10.082 0 0 0 10.072 0Zm0 18.594a8.522 8.522 0 1 1 8.522-8.522 8.532 8.532 0 0 1-8.522 8.522Zm3.647-9.845a.774.774 0 1 1-1.096 1.096l-1.776-1.777v5.877a.775.775 0 1 1-1.55 0V8.069L7.521 9.845A.775.775 0 1 1 6.425 8.75l3.099-3.1a.775.775 0 0 1 1.096 0l3.099 3.1Z"></path>
+												</svg>
+											</span>
+											<span className=""> +12% </span>
+										</div>
+									</div>
 
-                  <div className="px-4 pt-4 lg:px-8">
-                    <h2 className="text-5xl font-medium">60%</h2>
-                  </div>
-                </div>
-              </div>
+									<div className="px-4 pt-4 lg:px-8">
+										<h2 className="text-5xl font-medium">70%</h2>
+									</div>
+								</div>
+
+								<div className="rounded-xl bg-secondary/10 p-5">
+									<div className="flex flex-wrap items-center justify-between gap-2 border-b-[3px] border-secondary/20 pb-2">
+										<div className="relative flex items-center gap-2 before:absolute before:-bottom-[11px] before:left-0 before:h-[3px] before:w-[calc(100%+.5rem)] before:bg-secondary">
+											<span className="rounded-lg bg-accent-1 p-1 text-primary">
+												<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" className="h-5 w-5">
+													<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"></path>
+													<path d="m10.97 4.97-.02.022-3.473 4.425-2.093-2.094a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05"></path>
+												</svg>
+											</span>
+											<h6 className="text-base font-medium">
+												Conversion Rate
+											</h6>
+										</div>
+
+										<div className="flex items-center gap-px text-sm font-medium text-primary">
+											<span className="">
+												<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 21 21" className="h-4 w-4">
+													<path d="M10.072 0a10.072 10.072 0 1 0 10.072 10.072A10.082 10.082 0 0 0 10.072 0Zm0 18.594a8.522 8.522 0 1 1 8.522-8.522 8.532 8.532 0 0 1-8.522 8.522Zm3.647-9.845a.774.774 0 1 1-1.096 1.096l-1.776-1.777v5.877a.775.775 0 1 1-1.55 0V8.069L7.521 9.845A.775.775 0 1 1 6.425 8.75l3.099-3.1a.775.775 0 0 1 1.096 0l3.099 3.1Z"></path>
+												</svg>
+											</span>
+											<span className=""> +12% </span>
+										</div>
+									</div>
+
+									<div className="px-4 pt-4 lg:px-8">
+										<h2 className="text-5xl font-medium">80%</h2>
+									</div>
+								</div>
+							</div>
 
               <div className="rounded-xl bg-secondary/10 p-5 2xl:col-span-2">
                 <div className="flex flex-wrap items-center justify-between gap-2 border-b-[3px] border-secondary/20 pb-2">
