@@ -40,12 +40,13 @@ function CustomerCard({ customer }) {
           document.getElementById("portal")
         )}
       <tr
-        className="flex  w-full p-2 my-2 border border-black rounded"
+        className="border-b dark:border-neutral-500"
         onClick={onCustomerClick}
       >
-        <td className="text-center w-1/3">{customer.firstName}</td>
-        <td className="text-center w-1/3">{customer.lastName}</td>
-        <td className="text-center w-1/3">
+        <td className="whitespace-nowrap px-6 py-4">{customer.firstName}</td>
+        <td className="whitespace-nowrap px-6 py-4">{customer.lastName}</td>
+        <td className="whitespace-nowrap px-6 py-4">{customer.email}</td>
+        <td className="whitespace-nowrap px-6 py-4">
           <svg
             className="w-6 h-6 mx-auto  text-[#10113A] cursor-pointer"
             aria-hidden="true"
