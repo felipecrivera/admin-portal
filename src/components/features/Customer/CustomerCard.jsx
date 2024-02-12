@@ -43,9 +43,9 @@ function CustomerCard({ customer }) {
         className="border-b dark:border-neutral-500"
         onClick={onCustomerClick}
       >
-        <td className="whitespace-nowrap px-6 py-4">{customer.firstName}</td>
-        <td className="whitespace-nowrap px-6 py-4">{customer.lastName}</td>
-        <td className="whitespace-nowrap px-6 py-4">{customer.email}</td>
+        <td className="cursor-pointer whitespace-nowrap px-6 py-4">{customer.firstName}</td>
+        <td className="cursor-pointer whitespace-nowrap px-6 py-4">{customer.lastName}</td>
+        <td className="cursor-pointer whitespace-nowrap px-6 py-4">{customer.email}</td>
         <td className="whitespace-nowrap px-6 py-4">
           <svg
             className="w-6 h-6 mx-auto  text-[#10113A] cursor-pointer"

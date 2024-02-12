@@ -99,35 +99,44 @@ function Report(props) {
         </form>
       </div>
       <div className="w-full flex flex-col">
-        {isLoading && <Loading />}
+        <div class="flex flex-col">
+          <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+              <div class="overflow-hidden">
+                {isLoading && <Loading />}
 
-        {!isLoading &&
-          records &&
-          (records.length > 0 ? (
-            <table className="flex flex-col">
-              <thead>
-                <tr className="flex w-full p-1 my-2">
-                  <th className="text-center w-1/4">First name</th>
-                  <th className="text-center w-1/4">Last name</th>
-                  <th className="text-center w-1/4">Company</th>
-                  <th className="text-center w-1/4">Campaign</th>
-                </tr>
-              </thead>
-              <tbody>
-                {records.map((item) => {
-                  return (
-                    <SingleReport
-                      handleExporting={handleExporting}
-                      key={item._id}
-                      report={item}
-                    />
-                  );
-                })}
-              </tbody>
-            </table>
-          ) : (
-            <p className="font-semibold mx-auto my-2">No reports available</p>
-          ))}
+                {!isLoading &&
+                  records &&
+                  (records.length > 0 ? (
+                    <table className="min-w-full text-left text-sm font-light">
+                      <thead className="border-b font-medium dark:border-neutral-500">
+                        <tr className="">
+                          <th scope="col" className="px-6 py-4"></th>
+                          <th scope="col" className="px-6 py-4">First name</th>
+                          <th scope="col" className="px-6 py-4">Last name</th>
+                          <th scope="col" className="px-6 py-4">Company</th>
+                          <th scope="col" className="px-6 py-4">Campaign</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {records.map((item) => {
+                          return (
+                            <SingleReport
+                              handleExporting={handleExporting}
+                              key={item._id}
+                              report={item}
+                            />
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  ) : (
+                    <p className="font-semibold mx-auto my-2">No reports available</p>
+                  ))}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
   );
