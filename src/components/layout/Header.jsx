@@ -3,7 +3,7 @@ import logo from "../../assets/img/sidebar-bg.jpg";
 import appLogo from "../../assets/img/prospectiq-logo.svg";
 import iqConnectLogo from "../../assets/img/iqconnect.png";
 import prospectiqLogo from "../../assets/img/prospectiq-logo.svg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   FaRegUser,
   FaRegNewspaper,
@@ -15,7 +15,9 @@ import {
 
 function Header() {
   const navigate = useNavigate();
-
+  const location = useLocation();
+  const pathname = location.pathname;
+  console.log(pathname)
   const onLogout = () => {
     localStorage.setItem("isUserLoggedIn", false);
     localStorage.setItem("token", null);
@@ -37,7 +39,7 @@ function Header() {
           {localStorage.getItem("isUserLoggedIn") == "true" && (
             <li>
               <a
-                className="group flex items-center gap-3.5 rounded-lg px-2.5 py-2 font-medium text-white transition hover:bg-secondary hover:text-white"
+                className={`group flex items-center gap-3.5 rounded-lg px-2.5 py-2 font-medium text-white transition hover:bg-secondary hover:text-white ${(pathname == '/' || pathname.startsWith('/customer')) ? 'text-base text-indigo-700' : ''}`}
                 href="/"
               >
                 <span className="text-secondary transition group-hover:text-white">
@@ -50,7 +52,7 @@ function Header() {
           {localStorage.getItem("isUserLoggedIn") == "true" && (
             <li>
               <a
-                className="group flex items-center gap-3.5 rounded-lg px-2.5 py-2 font-medium text-white transition hover:bg-secondary hover:text-white"
+                className={`group flex items-center gap-3.5 rounded-lg px-2.5 py-2 font-medium text-white transition hover:bg-secondary hover:text-white ${(pathname.startsWith('/report')) ? 'text-base text-indigo-700' : ''}`}
                 href="/report"
               >
                 <span className="text-secondary transition group-hover:text-white">
@@ -77,7 +79,7 @@ function Header() {
           {localStorage.getItem("isUserLoggedIn") == "true" && (
             <li>
               <a
-                className="group flex items-center gap-3.5 rounded-lg px-2.5 py-2 font-medium text-white transition hover:bg-secondary hover:text-white"
+                className={`group flex items-center gap-3.5 rounded-lg px-2.5 py-2 font-medium text-white transition hover:bg-secondary hover:text-white ${(pathname.startsWith('/record')) ? 'text-base text-indigo-700' : ''}`}
                 href="/record"
               >
                 <span className="text-secondary transition group-hover:text-white">

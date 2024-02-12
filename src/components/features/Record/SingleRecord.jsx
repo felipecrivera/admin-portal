@@ -36,12 +36,22 @@ function SingleRecord({ record }) {
           document.getElementById("portal")
         )}
 
-      <tr className="flex w-full p-2 my-2 border border-black rounded">
-        <td className="text-center w-1/5"> {record.firstName} </td>
-        <td className="text-center w-1/5"> {record.lastName} </td>
-        <td className="text-center w-1/5"> {record.company} </td>
-        <td className="text-center w-1/5"> {record.campaign} </td>
-        <td className="text-center w-1/5">
+      <tr className="border-b dark:border-neutral-500">
+        <td className="cursor-pointer whitespace-nowrap px-6 py-4"> {record.activationDate} </td>
+        <td className="cursor-pointer whitespace-nowrap px-6 py-4"> {record.campaign} </td>
+        <td className="cursor-pointer whitespace-nowrap px-6 py-4"> {record.company} </td>
+        <td className="cursor-pointer whitespace-nowrap px-6 py-4"> {record.firstName} </td>
+        <td className="cursor-pointer whitespace-nowrap px-6 py-4"> {record.lastName} </td>
+        <td className="cursor-pointer whitespace-nowrap px-6 py-4"> {record.title} </td>
+        <td className="cursor-pointer whitespace-nowrap px-6 py-4"> {record.email} </td>
+        <td className="cursor-pointer whitespace-nowrap px-6 py-4"> {record.phone} </td>
+        <td className="cursor-pointer whitespace-nowrap px-6 py-4"> {record.address} </td>
+        <td className="cursor-pointer whitespace-nowrap px-6 py-4"> {record.city} </td>
+        <td className="cursor-pointer whitespace-nowrap px-6 py-4"> {record.state} </td>
+        <td className="cursor-pointer whitespace-nowrap px-6 py-4"> {record.zipCode} </td>
+        <td className="cursor-pointer whitespace-nowrap px-6 py-4"> {record.outCome} </td>
+        <td className="cursor-pointer whitespace-nowrap px-6 py-4"> {record.notes} </td>
+        <td className="whitespace-nowrap px-6 py-4">
           <svg
             className="w-6 h-6 mx-auto  text-[#10113A] cursor-pointer"
             aria-hidden="true"

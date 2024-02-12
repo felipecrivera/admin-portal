@@ -99,10 +99,10 @@ function Report(props) {
         </form>
       </div>
       <div className="w-full flex flex-col">
-        <div class="flex flex-col">
-          <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
-              <div class="overflow-hidden">
+        <div className="flex flex-col">
+          <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+              <div className="overflow-hidden">
                 {isLoading && <Loading />}
 
                 {!isLoading &&
@@ -112,10 +112,20 @@ function Report(props) {
                       <thead className="border-b font-medium dark:border-neutral-500">
                         <tr className="">
                           <th scope="col" className="px-6 py-4"></th>
+                          <th scope="col" className="px-6 py-4">Activation Date</th>
+                          <th scope="col" className="px-6 py-4">Campaign</th>
+                          <th scope="col" className="px-6 py-4">Company</th>
                           <th scope="col" className="px-6 py-4">First name</th>
                           <th scope="col" className="px-6 py-4">Last name</th>
-                          <th scope="col" className="px-6 py-4">Company</th>
-                          <th scope="col" className="px-6 py-4">Campaign</th>
+                          <th scope="col" className="px-6 py-4">Title</th>
+                          <th scope="col" className="px-6 py-4">Email</th>
+                          <th scope="col" className="px-6 py-4">Phone</th>
+                          <th scope="col" className="px-6 py-4">Address</th>
+                          <th scope="col" className="px-6 py-4">City</th>
+                          <th scope="col" className="px-6 py-4">State</th>
+                          <th scope="col" className="px-6 py-4">Zip Code</th>
+                          <th scope="col" className="px-6 py-4">Outcome</th>
+                          <th scope="col" className="px-6 py-4">Notes</th>
                         </tr>
                       </thead>
                       <tbody>
