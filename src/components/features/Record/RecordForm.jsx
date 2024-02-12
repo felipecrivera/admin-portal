@@ -26,6 +26,8 @@ function RecordForm({
           zipCode: "",
           outCome: "",
           notes: "",
+          bookingDate: "",
+          bookingTime: "",
         }
   );
 
@@ -59,6 +61,8 @@ function RecordForm({
             zipCode: "",
             outCome: "",
             notes: "",
+            bookingDate: "",
+            bookingTime: "",
           });
           handleOnCancel();
         }}
@@ -84,7 +88,7 @@ function RecordForm({
                 onChange={handleOnChange}
               />
             </div>
-            <div className="self-center my-1">
+            <div className="self-center my-1 w-full">
               <div className="mb-1">
                 <label htmlFor="activationDate" className="  text-white">
                   Activation Date
@@ -96,7 +100,7 @@ function RecordForm({
                 type="date"
                 name="activationDate"
                 value={formData.activationDate}
-                className="rounded   p-1 focus:shadow-outline focus:outline-none"
+                className="rounded w-full  p-1 focus:shadow-outline focus:outline-none"
                 onChange={handleOnChange}
               />
             </div>
@@ -173,6 +177,21 @@ function RecordForm({
                 onChange={handleOnChange}
                 name="email"
                 className="rounded  p-1 focus:shadow-outline focus:outline-none"
+              />
+            </div>
+            <div className="self-center my-1 w-full">
+              <div className="mb-1">
+                <label htmlFor="email" className=" text-white">
+                  Booking Date
+                </label>
+              </div>
+              <input
+                id="bookingDate"
+                type="date"
+                value={formData.bookingDate}
+                onChange={handleOnChange}
+                name="bookingDate"
+                className="rounded w-full p-1 focus:shadow-outline focus:outline-none"
               />
             </div>
           </div>
@@ -283,6 +302,21 @@ function RecordForm({
                 onChange={handleOnChange}
                 name="notes"
                 className="rounded  p-1 focus:shadow-outline focus:outline-none"
+              />
+            </div>
+            <div className="self-center w-full my-1">
+              <div className="mb-1">
+                <label htmlFor="notes" className=" text-white">
+                  Boooking Time
+                </label>
+              </div>
+              <input
+                id="bookingTime"
+                type="time"
+                value={formData.bookingTime}
+                onChange={handleOnChange}
+                name="bookingTime"
+                className="rounded w-full p-1 focus:shadow-outline focus:outline-none"
               />
             </div>
           </div>

@@ -2,7 +2,7 @@ import React from "react";
 
 function SingleReport({ report, handleExporting }) {
   return (
-    <tr className="flex  w-full p-1 my-2">
+    <tr className="flex  w-full p-2 my-2 border border-black rounded">
       <td>
         <div className="flex items-center mb-4">
           <input

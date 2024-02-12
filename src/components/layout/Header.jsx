@@ -3,8 +3,25 @@ import logo from "../../assets/img/sidebar-bg.jpg";
 import appLogo from "../../assets/img/prospectiq-logo.svg";
 import iqConnectLogo from "../../assets/img/iqconnect.png";
 import prospectiqLogo from "../../assets/img/prospectiq-logo.svg";
+import { useNavigate } from "react-router-dom";
+import {
+  FaRegUser,
+  FaRegNewspaper,
+  FaMoneyBillAlt,
+  FaBookOpen,
+  FaSignOutAlt,
+  FaSignInAlt,
+} from "react-icons/fa";
 
 function Header() {
+  const navigate = useNavigate();
+
+  const onLogout = () => {
+    localStorage.setItem("isUserLoggedIn", false);
+    localStorage.setItem("token", null);
+    navigate("/signin");
+  };
+
   return (
     <header className="relative w-full py-4 lg:h-full lg:w-72 lg:py-8">
       <div
@@ -12,102 +29,76 @@ function Header() {
       ></div>
 
       <div className="relative z-10 flex h-full justify-between gap-10 px-5 lg:flex-col">
-        <a href="" className="block">
+        <a href="/" className="block">
           <img src={appLogo} alt="ProspectIQ Logo" className="h-8 lg:h-10" />
         </a>
 
         <ul className="hidden flex-1 space-y-1.5 lg:block">
+          {localStorage.getItem("isUserLoggedIn") == "true" && (
+            <li>
+              <a
+                className="group flex items-center gap-3.5 rounded-lg px-2.5 py-2 font-medium text-white transition hover:bg-secondary hover:text-white"
+                href="/"
+              >
+                <span className="text-secondary transition group-hover:text-white">
+                  <FaRegUser />
+                </span>
+                <span>Customers</span>
+              </a>
+            </li>
+          )}
+          {localStorage.getItem("isUserLoggedIn") == "true" && (
+            <li>
+              <a
+                className="group flex items-center gap-3.5 rounded-lg px-2.5 py-2 font-medium text-white transition hover:bg-secondary hover:text-white"
+                href="/report"
+              >
+                <span className="text-secondary transition group-hover:text-white">
+                  <FaBookOpen />
+                </span>
+                <span>Reports</span>
+              </a>
+            </li>
+          )}
+          {localStorage.getItem("isUserLoggedIn") == "true" && (
+            <li>
+              <a
+                className="group flex items-center gap-3.5 rounded-lg px-2.5 py-2 font-medium text-white transition hover:bg-secondary hover:text-white"
+                href="https://google.com"
+                target="_blank"
+              >
+                <span className="text-secondary transition group-hover:text-white">
+                  <FaMoneyBillAlt />
+                </span>
+                <span>Billings</span>
+              </a>
+            </li>
+          )}
+          {localStorage.getItem("isUserLoggedIn") == "true" && (
+            <li>
+              <a
+                className="group flex items-center gap-3.5 rounded-lg px-2.5 py-2 font-medium text-white transition hover:bg-secondary hover:text-white"
+                href="/record"
+              >
+                <span className="text-secondary transition group-hover:text-white">
+                  <FaRegNewspaper />
+                </span>
+                <span>Records</span>
+              </a>
+            </li>
+          )}
           <li>
-            <a
-              className="group flex items-center gap-3.5 rounded-lg px-2.5 py-2 font-medium text-white transition hover:bg-secondary hover:text-white"
-              href="/"
-            >
-              <span className="text-secondary transition group-hover:text-white">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  className="h-5 w-5"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                  <path d="M9 22V12h6v10" />
-                </svg>
-              </span>
-              <span>Dashboard</span>
-            </a>
-          </li>
-          <li>
-            <a
-              className="group flex items-center gap-3.5 rounded-lg px-2.5 py-2 font-medium text-white transition hover:bg-secondary hover:text-white"
-              href="/report"
-            >
-              <span className="text-secondary transition group-hover:text-white">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  className="h-5 w-5"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                  <path d="M9 22V12h6v10" />
-                </svg>
-              </span>
-              <span>Reports</span>
-            </a>
-          </li>
-          <li>
-            <a
-              className="group flex items-center gap-3.5 rounded-lg px-2.5 py-2 font-medium text-white transition hover:bg-secondary hover:text-white"
-              href="/billings"
-            >
-              <span className="text-secondary transition group-hover:text-white">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  className="h-5 w-5"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                  <path d="M9 22V12h6v10" />
-                </svg>
-              </span>
-              <span>Billings</span>
-            </a>
-          </li>
-          <li>
-            <a
-              className="group flex items-center gap-3.5 rounded-lg px-2.5 py-2 font-medium text-white transition hover:bg-secondary hover:text-white"
-              href="/record"
-            >
-              <span className="text-secondary transition group-hover:text-white">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  className="h-5 w-5"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                  <path d="M9 22V12h6v10" />
-                </svg>
-              </span>
-              <span>Records</span>
-            </a>
+            {localStorage.getItem("isUserLoggedIn") == "true" && (
+              <button
+                className="group flex items-center gap-3.5 rounded-lg px-2.5 py-2 font-medium text-white transition hover:bg-secondary hover:text-white"
+                onClick={onLogout}
+              >
+                <span className="text-secondary transition group-hover:text-white">
+                  <FaSignOutAlt />
+                </span>
+                <span>Logout</span>
+              </button>
+            )}
           </li>
         </ul>
 
@@ -142,7 +133,7 @@ function Header() {
       >
         <div className="flex h-full flex-col justify-between gap-5 p-5">
           <div className="">
-            <a href="" className="block">
+            <a href="/" className="block">
               <img
                 src={prospectiqLogo}
                 alt="ProspectIQ Logo"
@@ -161,22 +152,57 @@ function Header() {
                   href="index.html"
                 >
                   <span className="text-secondary transition group-hover:text-white">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      className="h-5 w-5"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                      <path d="M9 22V12h6v10" />
-                    </svg>
+                    <FaRegUser />
                   </span>
-                  <span>Dashboard</span>
+                  <span>Customers</span>
                 </a>
+              </li>
+              <li>
+                <a
+                  className="group flex items-center gap-3.5 rounded-lg px-2.5 py-2 font-medium text-white transition hover:bg-secondary hover:text-white"
+                  href="/report"
+                >
+                  <span className="text-secondary transition group-hover:text-white">
+                    <FaBookOpen />
+                  </span>
+                  <span>Reports</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  className="group flex items-center gap-3.5 rounded-lg px-2.5 py-2 font-medium text-white transition hover:bg-secondary hover:text-white"
+                  href="http://www.google.com"
+                  target="_blank"
+                >
+                  <span className="text-secondary transition group-hover:text-white">
+                    <FaMoneyBillAlt />
+                  </span>
+                  <span>Billings</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  className="group flex items-center gap-3.5 rounded-lg px-2.5 py-2 font-medium text-white transition hover:bg-secondary hover:text-white"
+                  href="/record"
+                >
+                  <span className="text-secondary transition group-hover:text-white">
+                    <FaRegNewspaper />
+                  </span>
+                  <span>Records</span>
+                </a>
+              </li>
+              <li>
+                {localStorage.getItem("isUserLoggedIn") == "true" && (
+                  <button
+                    className="group flex items-center gap-3.5 rounded-lg px-2.5 py-2 font-medium text-white transition hover:bg-secondary hover:text-white"
+                    onClick={onLogout}
+                  >
+                    <span className="text-secondary transition group-hover:text-white">
+                      <FaSignOutAlt />
+                    </span>
+                    <span>Logout</span>
+                  </button>
+                )}
               </li>
             </ul>
           </nav>

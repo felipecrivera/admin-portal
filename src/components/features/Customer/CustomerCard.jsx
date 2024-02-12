@@ -1,23 +1,70 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import CustomerForm from "./CustomerForm";
 
 function CustomerCard({ customer }) {
   const navigate = useNavigate();
-  console.log(customer);
+  const [showForm, setShowForm] = useState(false);
 
   const onCustomerClick = () => {
     navigate(`/customer/${customer._id}`);
   };
 
+  const handleOnCancel = () => {
+    setShowForm(false);
+  };
+
+  const handleOnSave = async (formData) => {
+    const rows = [formData];
+
+    const [editCustomer, { isLoading: isUpdating }] =
+      await useEditCustomerMutation(rows);
+
+    setShowForm(false);
+  };
+
+  const openEditCustomerForm = (customer) => {
+    setShowForm(true);
+  };
+
   return (
-    <div
-      className="border border-black rounded px-3 py-2 m-1"
-      onClick={onCustomerClick}
-    >
-      <h5>
-        {customer.firstName} {customer.lastName}
-      </h5>
-    </div>
+    <>
+      {showForm &&
+        createPortal(
+          <CustomerForm
+            title="Edit customer"
+            handleOnCancel={handleOnCancel}
+            handleOnSave={handleOnSave}
+            isUpdating={isUpdating}
+          />,
+          document.getElementById("portal")
+        )}
+      <tr
+        className="flex  w-full p-2 my-2 border border-black rounded"
+        onClick={onCustomerClick}
+      >
+        <td className="text-center w-1/3">{customer.firstName}</td>
+        <td className="text-center w-1/3">{customer.lastName}</td>
+        <td className="text-center w-1/3">
+          <svg
+            className="w-6 h-6 mx-auto  text-[#10113A] cursor-pointer"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            onClick={() => openEditCustomerForm(customer)}
+          >
+            <path
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="m14.3 4.8 2.9 2.9M7 7H4a1 1 0 0 0-1 1v10c0 .6.4 1 1 1h11c.6 0 1-.4 1-1v-4.5m2.4-10a2 2 0 0 1 0 3l-6.8 6.8L8 14l.7-3.6 6.9-6.8a2 2 0 0 1 2.8 0Z"
+            />
+          </svg>
+        </td>
+      </tr>
+    </>
   );
 }
 

@@ -27,14 +27,61 @@ function Record(props) {
     if (csvFile) {
       const reader = new FileReader();
       reader.onload = async (event) => {
-        const wb = read(event.target.result);
-        const sheets = wb.SheetNames;
+        const wb = read(event.target.result, {
+          type: "binary",
+          cellDates: true,
+          dateNF: "dd/mm/yy",
+          cellNF: false,
+          cellText: false,
+        });
+        const sheet = wb.SheetNames[0];
+        const workSheet = wb.Sheets[sheet];
 
-        if (sheets.length) {
-          const rows = utils.sheet_to_json(wb.Sheets[sheets[0]]);
-          console.log(rows);
-          await createRecord(rows);
-        }
+        const data = utils.sheet_to_json(workSheet, { w: true });
+        console.log(data);
+        const csvColumnMapping = {
+          "Activation Date": "activationDate",
+          Company: "company",
+          Campaign: "campaign",
+          "First Name": "firstName",
+          "Last Name": "lastName",
+          Title: "title",
+          Phone: "phone",
+          Email: "email",
+          Address: "address",
+          City: "city",
+          State: "state",
+          "Zip Code": "zipCode",
+          Outcome: "outCome",
+          "Booking Date": "bookingDate",
+          "Booking Time": "bookingTime",
+          Notes: "notes",
+        };
+
+        let processedData = data.map((item) => {
+          const obj = {};
+          function convert(str) {
+            let date = new Date(str);
+            let mnth = ("0" + (date.getMonth() + 1)).slice(-2);
+            let day = ("0" + date.getDate()).slice(-2);
+            return [date.getFullYear(), mnth, day].join("-");
+          }
+          Object.keys(item).forEach((key) => {
+            if (
+              csvColumnMapping[key.trim()] == "bookingDate" ||
+              csvColumnMapping[key.trim()] == "activationDate"
+            ) {
+              obj[csvColumnMapping[key.trim()]] = convert(item[key]);
+            } else {
+              obj[csvColumnMapping[key.trim()]] = item[key];
+            }
+          });
+
+          return obj;
+        });
+
+        console.log(processedData);
+        await createRecord(processedData);
       };
       reader.readAsArrayBuffer(csvFile);
     }
@@ -99,7 +146,7 @@ function Record(props) {
           {!isLoading &&
             records &&
             (records.length > 0 ? (
-              <table class="flex flex-col">
+              <table className="flex flex-col">
                 <thead>
                   <tr className="flex w-full p-1 my-2">
                     <th className="text-center w-1/5">First name</th>

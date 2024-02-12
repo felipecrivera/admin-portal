@@ -17,6 +17,7 @@ function App() {
         <Routes>
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
+
           <Route element={<PrivateRoute />}>
             <Route path="/" element={<Customer />} />
             <Route path="/customer/:id" element={<Dashboard />} />
