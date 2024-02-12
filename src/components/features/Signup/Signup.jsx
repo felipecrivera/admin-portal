@@ -60,23 +60,11 @@ function Signup() {
     }
   };
   return (
-    <main className="w-full main main--start p-sign-up">
+    <main className="w-full main main--start p-sign-up pt-20">
       <section className="sign" id="sign">
         <div className="c-grid">
           <div className="section__wrapper">
             <div className="c-section" data-align="center">
-              <div className="c-section__head">
-                <div className="logo logo--header">
-                  <a className="logo__link" href="/">
-                    <img
-                      className="logo__image"
-                      src={logo2}
-                      srcSet={`${logo22x} 2x`}
-                      alt="Logotype"
-                    />
-                  </a>
-                </div>
-              </div>
               <div className="c-section__body">
                 <h5 className="c-section__title">Sign up</h5>
                 <p className="c-section__desc">
