@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import SingleRecord from "./SingleRecord";
 import { createPortal } from "react-dom";
 import RecordForm from "./RecordForm";
 import { read, utils } from "xlsx";
 import {
-  recordApi,
+  useGetRecordQuery,
   useCreateRecordMutation,
 } from "../../../redux/recordApi.js";
 import Loading from "../../utils/Loading.jsx";
@@ -14,7 +14,7 @@ function Record(props) {
 
   const [showForm, setShowForm] = useState(false);
 
-  const { data: records, error, isLoading } = recordApi.useGetRecordQuery();
+  const { data: records, isLoading } = useGetRecordQuery();
   const [createRecord, { isLoading: isUpdating }] = useCreateRecordMutation();
 
   const onCreateRecordTap = () => {
@@ -95,15 +95,25 @@ function Record(props) {
 
         <div className="w-full flex flex-col ">
           {isLoading && <Loading />}
-          {error && !isLoading && <p> {error.toString()}</p>}
 
           {!isLoading &&
-            !error &&
             records &&
             (records.length > 0 ? (
-              records.map((item) => {
-                return <SingleRecord key={item._id} record={item} />;
-              })
+              <table class="flex flex-col">
+                <thead>
+                  <tr className="flex w-full p-1 my-2">
+                    <th className="text-center w-1/5">First name</th>
+                    <th className="text-center w-1/5">Last name</th>
+                    <th className="text-center w-1/5">Company</th>
+                    <th className="text-center w-1/5">Campaign</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {records.map((item) => {
+                    return <SingleRecord key={item._id} record={item} />;
+                  })}
+                </tbody>
+              </table>
             ) : (
               <p className="font-semibold mx-auto my-2">No records available</p>
             ))}

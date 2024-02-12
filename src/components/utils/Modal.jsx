@@ -3,9 +3,9 @@ import Loading from "./Loading";
 
 function Modal(props) {
   return (
-    <div className="fixed top-[10vh] rounded-lg right-[30%] z-40 w-[90%] bg-[#10113A] shadow md:w-[30rem]  overflow-auto  ">
+    <div className="fixed top-[5vh] rounded-lg w-fit md:right-[30%] z-40  bg-[#10113A] shadow  overflow-auto  ">
       <div
-        className="text-center rounded-lg text-white m-0 font-bold text-2xl p-2  bg-[#10113A]"
+        className="text-center rounded-lg text-white m-0 font-bold text-xl p-2  bg-[#10113A]"
         id="modal-header"
       >
         {props.title}

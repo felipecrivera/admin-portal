@@ -80,7 +80,7 @@ function RecordForm({
                 type="text"
                 name="campaign"
                 value={formData.campaign}
-                className="rounded   focus:shadow-outline focus:outline-none"
+                className="rounded p-1  focus:shadow-outline focus:outline-none"
                 onChange={handleOnChange}
               />
             </div>
@@ -96,7 +96,7 @@ function RecordForm({
                 type="date"
                 name="activationDate"
                 value={formData.activationDate}
-                className="rounded   focus:shadow-outline focus:outline-none"
+                className="rounded   p-1 focus:shadow-outline focus:outline-none"
                 onChange={handleOnChange}
               />
             </div>
@@ -112,7 +112,7 @@ function RecordForm({
                 value={formData.company}
                 onChange={handleOnChange}
                 name="company"
-                className="rounded  focus:shadow-outline focus:outline-none"
+                className="rounded  p-1 focus:shadow-outline focus:outline-none"
               />
             </div>
             <div className="self-center my-1">
@@ -127,7 +127,7 @@ function RecordForm({
                 onChange={handleOnChange}
                 name="title"
                 value={formData.title}
-                className="rounded  focus:shadow-outline focus:outline-none"
+                className="rounded  p-1 focus:shadow-outline focus:outline-none"
               />
             </div>
             <div className="self-center my-1">
@@ -142,7 +142,7 @@ function RecordForm({
                 type="text"
                 value={formData.firstName}
                 name="firstName"
-                className="rounded  focus:shadow-outline focus:outline-none"
+                className="rounded  p-1 focus:shadow-outline focus:outline-none"
               />
             </div>
             <div className="self-center my-1">
@@ -157,7 +157,7 @@ function RecordForm({
                 onChange={handleOnChange}
                 name="lastName"
                 value={formData.lastName}
-                className="rounded  focus:shadow-outline focus:outline-none"
+                className="rounded  p-1 focus:shadow-outline focus:outline-none"
               />
             </div>
             <div className="self-center my-1">
@@ -172,7 +172,7 @@ function RecordForm({
                 value={formData.email}
                 onChange={handleOnChange}
                 name="email"
-                className="rounded  focus:shadow-outline focus:outline-none"
+                className="rounded  p-1 focus:shadow-outline focus:outline-none"
               />
             </div>
           </div>
@@ -189,7 +189,7 @@ function RecordForm({
                 onChange={handleOnChange}
                 name="phone"
                 value={formData.phone}
-                className="rounded  focus:shadow-outline focus:outline-none"
+                className="rounded  p-1 focus:shadow-outline focus:outline-none"
               />
             </div>
 
@@ -205,7 +205,7 @@ function RecordForm({
                 onChange={handleOnChange}
                 name="address"
                 value={formData.address}
-                className="rounded  focus:shadow-outline focus:outline-none"
+                className="rounded  p-1 focus:shadow-outline focus:outline-none"
               />
             </div>
 
@@ -221,7 +221,7 @@ function RecordForm({
                 value={formData.city}
                 onChange={handleOnChange}
                 name="city"
-                className="rounded  focus:shadow-outline focus:outline-none"
+                className="rounded  p-1 focus:shadow-outline focus:outline-none"
               />
             </div>
             <div className="self-center my-1">
@@ -236,7 +236,7 @@ function RecordForm({
                 onChange={handleOnChange}
                 name="state"
                 value={formData.state}
-                className="rounded  focus:shadow-outline focus:outline-none"
+                className="rounded  p-1 focus:shadow-outline focus:outline-none"
               />
             </div>
             <div className="self-center my-1">
@@ -251,7 +251,7 @@ function RecordForm({
                 type="text"
                 onChange={handleOnChange}
                 name="zipCode"
-                className="rounded  focus:shadow-outline focus:outline-none"
+                className="rounded  p-1 focus:shadow-outline focus:outline-none"
               />
             </div>
             <div className="self-center my-1">
@@ -266,7 +266,7 @@ function RecordForm({
                 value={formData.outCome}
                 onChange={handleOnChange}
                 name="outCome"
-                className="rounded  focus:shadow-outline focus:outline-none"
+                className="rounded  p-1 focus:shadow-outline focus:outline-none"
               />
             </div>
 
@@ -282,7 +282,7 @@ function RecordForm({
                 value={formData.notes}
                 onChange={handleOnChange}
                 name="notes"
-                className="rounded  focus:shadow-outline focus:outline-none"
+                className="rounded  p-1 focus:shadow-outline focus:outline-none"
               />
             </div>
           </div>

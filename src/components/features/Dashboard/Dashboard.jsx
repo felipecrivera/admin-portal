@@ -1,6 +1,12 @@
 import React from "react";
 import Navbar from "../../layout/Navbar";
+import { useParams } from "react-router-dom";
+import { useGetCustomerDashboardQuery } from "../../../redux/customerApi";
+
 function Dashboard() {
+  const params = useParams();
+  const { data: records, isLoading } = useGetCustomerDashboardQuery(params.id);
+
   return (
     <main className="relative z-20 flex h-full flex-1 flex-col overflow-y-auto overflow-x-hidden rounded-3xl rounded-t-2xl bg-slate-50 p-5 lg:rounded-s-[3rem] lg:rounded-tr-none lg:p-12 2xl:p-16">
       <div className="border-b border-gray-200">

@@ -8,7 +8,12 @@ export const recordApi = createApi({
   }),
   endpoints: (builder) => ({
     getRecord: builder.query({
-      query: () => "/get",
+      query: () => ({
+        url: "/get",
+        headers: {
+          "x-access-token": localStorage.getItem("token"),
+        },
+      }),
       providesTags: ["Record"],
     }),
     updateRecord: builder.mutation({
@@ -18,6 +23,7 @@ export const recordApi = createApi({
         body: record,
         headers: {
           "Content-Type": "application/json",
+          "x-access-token": localStorage.getItem("token"),
         },
       }),
       invalidatesTags: ["Record"],
@@ -29,6 +35,7 @@ export const recordApi = createApi({
         body: records,
         headers: {
           "Content-Type": "application/json",
+          "x-access-token": localStorage.getItem("token"),
         },
       }),
       invalidatesTags: ["Record"],
