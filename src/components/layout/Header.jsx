@@ -30,7 +30,7 @@ function Header() {
         className={`absolute inset-0 -z-10 h-20 w-full bg-primary bg-[url(${logo})] bg-cover bg-center bg-no-repeat lg:h-full lg:w-96`}
       ></div>
 
-      <div className="relative z-10 flex h-full justify-between gap-10 px-5 lg:flex-col">
+      <div className="relative z-10 flex h-full justify-between gap-10 px-5 lg:flex-col" style={{"height": "90vh"}}>
         <a href="/" className="block">
           <img src={appLogo} alt="ProspectIQ Logo" className="h-8 lg:h-10" />
         </a>

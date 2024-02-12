@@ -57,6 +57,7 @@ function Report(props) {
   return (
     <main
       className={`relative mx-2 z-20 flex h-full flex-1 flex-col overflow-y-auto overflow-x-hidden rounded-3xl rounded-t-2xl bg-slate-50 p-5 lg:rounded-s-[3rem] lg:rounded-tr-none lg:p-12 2xl:p-16 `}
+      style={{"minHeight": "100vh"}}
     >
       <div className="w-full flex justify-around my-4">
         <form onSubmit={search} className="flex gap-4 flex-col md:flex-row">
