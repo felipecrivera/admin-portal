@@ -41,6 +41,7 @@ function Signin() {
     } catch (error) {
       localStorage.setItem("isUserLoggedIn", false);
       console.error("rejected", error);
+      setError(error.data.message)
     }
   };
   return (
@@ -84,7 +85,7 @@ function Signin() {
                   <div className="c-form__field c-form__field--link">
                     <a href="#">Forgot password?</a>
                   </div>
-                  <div>{error && <p> {error}</p>}</div>
+                  <div className="text-red-500">{error && <p> {error}</p>}</div>
 
                   <div className="c-form__field c-form__field--btn">
                     <div className="c-btn__wrapper">

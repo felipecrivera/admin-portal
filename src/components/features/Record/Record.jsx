@@ -81,7 +81,11 @@ function Record(props) {
         });
 
         console.log(processedData);
-        await createRecord(processedData);
+        createRecord(processedData).then((e) => {
+          console.log(e, "+_+_+_+")
+        }).catch((e) => {
+          console.log(e,"mmmmmmmmm")
+        })
       };
       reader.readAsArrayBuffer(csvFile);
     }
@@ -94,7 +98,13 @@ function Record(props) {
   const handleOnSave = async (formData) => {
     const rows = [formData];
 
-    await createRecord(rows);
+    createRecord(rows).then((e) => {
+      if (e.error) {
+        alert(e.error.data.message)
+      }
+    }).catch((e) => {
+      console.log(e)
+    })
 
     setShowForm(false);
   };
