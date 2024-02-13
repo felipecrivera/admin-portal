@@ -110,7 +110,7 @@ function Dashboard() {
               </div>
 
               <div className="grid gap-5">
-								<div className="rounded-xl bg-secondary/10 p-5">
+								<div className="rounded-xl bg-secondary/10 p-5 flex flex-col justify-between">
 									<div className="flex flex-wrap items-center justify-between gap-2 border-b-[3px] border-secondary/20 pb-2">
 										<div className="relative flex items-center gap-2 before:absolute before:-bottom-[11px] before:left-0 before:h-[3px] before:w-[calc(100%+.5rem)] before:bg-secondary">
 											<span className="rounded-lg bg-accent-1 p-1 text-primary">
@@ -166,7 +166,7 @@ function Dashboard() {
 									</div>
 								</div>
 
-								<div className="rounded-xl bg-secondary/10 p-5">
+								<div className="rounded-xl bg-secondary/10 p-5 flex flex-col justify-between">
 									<div className="flex flex-wrap items-center justify-between gap-2 border-b-[3px] border-secondary/20 pb-2">
 										<div className="relative flex items-center gap-2 before:absolute before:-bottom-[11px] before:left-0 before:h-[3px] before:w-[calc(100%+.5rem)] before:bg-secondary">
 											<span className="rounded-lg bg-accent-1 p-1 text-primary">
@@ -199,7 +199,7 @@ function Dashboard() {
               <div className="rounded-xl bg-secondary/10 p-5 2xl:col-span-2">
                 <div className="flex flex-wrap items-center justify-between gap-2 border-b-[3px] border-secondary/20 pb-2">
                   <div className="relative flex items-center gap-2 before:absolute before:-bottom-[11px] before:left-0 before:h-[3px] before:w-[calc(100%+.5rem)] before:bg-secondary">
-                    <span className="rounded-lg bg-accent-1 p-1 text-primary">
+                    <span className="rounded-lg bg-acflex flex-wrap items-center justify-between gap-2 border-b-[3px] border-secondary/20 pb-2cent-1 p-1 text-primary">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="currentColor"
@@ -216,16 +216,16 @@ function Dashboard() {
                   <div className="p-2 lg:p-4 min-w-500 ">
                     <div className="flex justify-between mt-6">
                       <div>
-                        <h6 className="text-base font-medium">Campaign 1</h6>
+                        <h6 className="text-base font-medium whitespace-pre">Campaign 1</h6>
                       </div>
                       <div className="flex gap-4">
-                        <h6 className="text-base font-medium">
+                        <h6 className="text-base font-medium whitespace-pre">
                           Callback: <span className="text-blue">4</span>
                         </h6>
-                        <h6 className="text-base font-medium">
+                        <h6 className="text-base font-medium whitespace-pre">
                           Email: <span className="text-blue">2</span>
                         </h6>
-                        <h6 className="text-base font-medium">
+                        <h6 className="text-base font-medium whitespace-pre">
                           Not Interested: <span className="text-blue">1</span>
                         </h6>
                       </div>
@@ -235,16 +235,16 @@ function Dashboard() {
 
                     <div className="flex justify-between">
                       <div>
-                        <h6 className="text-base font-medium">Campaign 2</h6>
+                        <h6 className="text-base font-medium whitespace-pre">Campaign 2</h6>
                       </div>
                       <div className="flex gap-4">
-                        <h6 className="text-base font-medium">
+                        <h6 className="text-base font-medium whitespace-pre">
                           Callback: <span className="text-blue">4</span>
                         </h6>
-                        <h6 className="text-base font-medium">
+                        <h6 className="text-base font-medium whitespace-pre">
                           Email: <span className="text-blue">2</span>
                         </h6>
-                        <h6 className="text-base font-medium">
+                        <h6 className="text-base font-medium whitespace-pre">
                           Not Interested: <span className="text-blue">1</span>
                         </h6>
                       </div>
@@ -254,16 +254,16 @@ function Dashboard() {
 
                     <div className="flex justify-between">
                       <div>
-                        <h6 className="text-base font-medium">Campaign 3</h6>
+                        <h6 className="text-base font-medium whitespace-pre">Campaign 3</h6>
                       </div>
                       <div className="flex gap-4">
-                        <h6 className="text-base font-medium">
+                        <h6 className="text-base font-medium whitespace-pre">
                           Callback: <span className="text-blue">4</span>
                         </h6>
-                        <h6 className="text-base font-medium">
+                        <h6 className="text-base font-medium whitespace-pre">
                           Email: <span className="text-blue">2</span>
                         </h6>
-                        <h6 className="text-base font-medium">
+                        <h6 className="text-base font-medium whitespace-pre">
                           Not Interested: <span className="text-blue">1</span>
                         </h6>
                       </div>
@@ -273,16 +273,16 @@ function Dashboard() {
 
                     <div className="flex justify-between">
                       <div>
-                        <h6 className="text-base font-medium">Campaign 4</h6>
+                        <h6 className="text-base font-medium whitespace-pre">Campaign 4</h6>
                       </div>
                       <div className="flex gap-4">
-                        <h6 className="text-base font-medium">
+                        <h6 className="text-base font-medium whitespace-pre">
                           Callback: <span className="text-blue">4</span>
                         </h6>
-                        <h6 className="text-base font-medium">
+                        <h6 className="text-base font-medium whitespace-pre">
                           Email: <span className="text-blue">2</span>
                         </h6>
-                        <h6 className="text-base font-medium">
+                        <h6 className="text-base font-medium whitespace-pre">
                           Not Interested: <span className="text-blue">1</span>
                         </h6>
                       </div>
