@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import logo2 from "../../../assets/img/logo-2.png";
 import logo22x from "../../../assets/img/logo-2@2x.png";
 import { useCreateCustomerMutation } from "../../../redux/customerApi";
@@ -17,6 +17,16 @@ function Signup() {
     { isLoading: isCreating, isSuccess, isError, error: customerError },
   ] = useCreateCustomerMutation();
   const navigate = useNavigate();
+
+
+  useEffect(() => {
+    if (customerError && isError) {
+      console.log(customerError);
+      setError(customerError.data.message);
+    } else {
+      if (isSuccess) navigate("/signin");
+    }
+  }, [isCreating, isSuccess, isError, customerError])
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -48,12 +58,6 @@ function Signup() {
     if (password === confirmPassowrd) {
       const formData = { firstName, lastName, email, password };
       await createCustomer(formData);
-      if (customerError && isError) {
-        console.log(customerError);
-        setError(customerError);
-      } else {
-        if (isSuccess) navigate("/signin");
-      }
     } else {
       setError("Passwords do not match");
       return;
@@ -168,7 +172,7 @@ function Signup() {
                       </div>
                     </div>
                   </div>
-                  <div>{error && <p> {error}</p>}</div>
+                  <div className="text-red-500">{error && <p> {error}</p>}</div>
                   <div className="c-form__field c-form__field--btn">
                     <div className="c-btn__wrapper">
                       {isCreating && <Loading text={"Signing up..."} />}
