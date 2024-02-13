@@ -65,6 +65,18 @@ function Signup() {
         <div className="c-grid">
           <div className="section__wrapper">
             <div className="c-section" data-align="center">
+              <div className="c-section__head">
+                <div className="logo logo--header">
+                  <a className="logo__link" href="/">
+                    <img
+                      className="logo__image"
+                      src={logo2}
+                      srcSet={`${logo22x} 2x`}
+                      alt="Logotype"
+                    />
+                  </a>
+                </div>
+              </div>
               <div className="c-section__body">
                 <h5 className="c-section__title">Sign up</h5>
                 <p className="c-section__desc">
@@ -175,7 +187,7 @@ function Signup() {
                     </div>
                   </div>
                   <p className="sign__link">
-                    Already have an account? <a href="#">Sign in</a>
+                    Already have an account? <a href="/signin">Sign in</a>
                   </p>
                   <div className="c-form__field c-form__field--info">
                     <p className="c-form__info">
@@ -188,8 +200,8 @@ function Signup() {
               </div>
               <div className="c-section__footer">
                 <p className="c-section__info">
-                  Having trouble? Contact us at
-                  <a href="#">support@prospectiq.ai</a>
+                  Having trouble? Contact us at {" "}
+                  <a href="mailto:support@prospectiq.ai">support@prospectiq.ai</a>
                 </p>
               </div>
             </div>

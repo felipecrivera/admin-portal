@@ -50,6 +50,18 @@ function Signin() {
         <div className="c-grid">
           <div className="section__wrapper">
             <div className="c-section" data-align="center">
+              <div className="c-section__head">
+                <div className="logo logo--header">
+                  <a className="logo__link" href="/">
+                    <img
+                      className="logo__image"
+                      src={logo2}
+                      srcSet={`${logo22x} 2x`}
+                      alt="Logotype"
+                    />
+                  </a>
+                </div>
+              </div>
               <div className="c-section__body">
                 <h5 className="c-section__title">Log in to your account</h5>
                 <div className="sign__with c-btn__wrapper c-btn__wrapper--column"></div>
