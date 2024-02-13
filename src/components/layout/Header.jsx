@@ -107,10 +107,6 @@ function Header() {
             </li>
           </ul>
 
-          <div className="hidden lg:block">
-            <img src={iqConnectLogo} alt="" className="h-5" />
-          </div>
-
           <button
             type="button"
             className="text-white/70 transition hover:text-white lg:hidden"
