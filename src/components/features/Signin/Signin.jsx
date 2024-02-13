@@ -3,16 +3,16 @@ import logo2 from "../../../assets/img/logo-2.png";
 import logo22x from "../../../assets/img/logo-2@2x.png";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../utils/Loading";
-import { useLoginCustomerMutation } from "../../../redux/customerApi";
+import { useLoginAdminMutation } from "../../../redux/adminApi";
 
 function Signin() {
   const emailRef = useRef();
   const passowrdRef = useRef();
   const [error, setError] = useState();
   const [
-    loginCustomer,
-    { isLoading: isLoggingIn, isSuccess, isError, data, error: customerError },
-  ] = useLoginCustomerMutation();
+    loginAdmin,
+    { isLoading: isLoggingIn, isSuccess, isError, data, error: adminError },
+  ] = useLoginAdminMutation();
   const navigate = useNavigate();
 
   const handleSignin = async (e) => {
@@ -33,9 +33,9 @@ function Signin() {
 
     const formData = { email, password };
     try {
-      const payload = await loginCustomer(formData).unwrap();
+      const payload = await loginAdmin(formData).unwrap();
       localStorage.setItem("isUserLoggedIn", true);
-      const { customer, token } = payload;
+      const { admin, token } = payload;
       localStorage.setItem("token", token);
       navigate("/");
     } catch (error) {

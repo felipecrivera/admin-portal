@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import logo2 from "../../../assets/img/logo-2.png";
 import logo22x from "../../../assets/img/logo-2@2x.png";
-import { useCreateCustomerMutation } from "../../../redux/customerApi";
+import { useCreateAdminMutation } from "../../../redux/adminApi";
 import Loading from "../../utils/Loading";
 import { useNavigate } from "react-router-dom";
 
@@ -13,20 +13,20 @@ function Signup() {
   const confirmPasswordRef = useRef();
   const [error, setError] = useState();
   const [
-    createCustomer,
-    { isLoading: isCreating, isSuccess, isError, error: customerError },
-  ] = useCreateCustomerMutation();
+    createAdmin,
+    { isLoading: isCreating, isSuccess, isError, error: adminError },
+  ] = useCreateAdminMutation();
   const navigate = useNavigate();
 
 
   useEffect(() => {
-    if (customerError && isError) {
-      console.log(customerError);
-      setError(customerError.data.message);
+    if (adminError && isError) {
+      console.log(adminError);
+      setError(adminError.data.message);
     } else {
       if (isSuccess) navigate("/signin");
     }
-  }, [isSuccess, isError, customerError])
+  }, [isSuccess, isError, adminError])
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -57,7 +57,7 @@ function Signup() {
 
     if (password === confirmPassowrd) {
       const formData = { firstName, lastName, email, password };
-      await createCustomer(formData);
+      await createAdmin(formData);
     } else {
       setError("Passwords do not match");
       return;

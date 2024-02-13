@@ -109,7 +109,7 @@ function Dashboard() {
                 </div>
               </div>
 
-              <div className="grid gap-5">
+              <div className="grid gap-5 col-span-2 2xl:col-span-2">
 								<div className="rounded-xl bg-secondary/10 p-5">
 									<div className="flex flex-wrap items-center justify-between gap-2 border-b-[3px] border-secondary/20 pb-2">
 										<div className="relative flex items-center gap-2 before:absolute before:-bottom-[11px] before:left-0 before:h-[3px] before:w-[calc(100%+.5rem)] before:bg-secondary">
@@ -265,7 +265,7 @@ function Dashboard() {
                 </div>
               </div>
 
-              <div className="rounded-xl bg-secondary/10 p-5">
+              <div className="rounded-xl bg-secondary/10 p-5 2xl:col-span-2">
                 <div className="flex flex-wrap items-center justify-between gap-2 border-b-[3px] border-secondary/20 pb-2">
                   <div className="relative flex items-center gap-2 before:absolute before:-bottom-[11px] before:left-0 before:h-[3px] before:w-[calc(100%+.5rem)] before:bg-secondary">
                     <span className="rounded-lg bg-accent-1 p-1 text-primary">
