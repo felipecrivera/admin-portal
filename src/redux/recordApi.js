@@ -10,6 +10,7 @@ export const recordApi = createApi({
     getRecord: builder.query({
       query: () => ({
         url: "/get",
+        method: "POST",
         headers: {
           "x-access-token": localStorage.getItem("token"),
         },

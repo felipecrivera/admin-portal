@@ -10,6 +10,7 @@ export const reportApi = createApi({
     searchRecords: builder.query({
       query: (searchQuery) => ({
         url: `/search?${searchQuery}`,
+        method: "POST",
         headers: {
           "x-access-token": localStorage.getItem("token"),
         },

@@ -10,7 +10,7 @@ export const adminApi = createApi({
     getAdmins: builder.query({
       query: () => ({
         url: "/get",
-        method: "GET",
+        method: "POST",
         headers: {
           "x-access-token": localStorage.getItem("token"),
         },
@@ -50,7 +50,7 @@ export const adminApi = createApi({
     getAdminDashboard: builder.query({
       query: (id) => ({
         url: `/getDashboard/${id}`,
-        method: "GET",
+        method: "POST",
         headers: {
           "x-access-token": localStorage.getItem("token"),
         },
