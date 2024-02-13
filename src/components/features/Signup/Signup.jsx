@@ -26,7 +26,7 @@ function Signup() {
     } else {
       if (isSuccess) navigate("/signin");
     }
-  }, [isCreating, isSuccess, isError, customerError])
+  }, [isSuccess, isError, customerError])
 
   const handleSignup = async (e) => {
     e.preventDefault();

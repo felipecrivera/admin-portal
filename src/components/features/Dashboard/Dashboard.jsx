@@ -88,7 +88,7 @@ function Dashboard() {
                   <div className="mb-2 flex flex-wrap justify-between gap-4 text-sm font-medium text-primary">
                     <p className="font-semibold">Progress Tracker</p>
                     <p>
-                      <span className="font-medium text-secondary">25%</span>
+                      <span className="font-medium text-secondary">25%</span> {" "}
                       to goal
                     </p>
                   </div>
