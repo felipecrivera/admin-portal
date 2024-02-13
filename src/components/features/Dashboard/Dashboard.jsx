@@ -40,7 +40,7 @@ function Dashboard() {
   };
 
   return (
-    <main className="relative z-20 flex h-full flex-1 flex-col overflow-y-auto overflow-x-hidden rounded-3xl rounded-t-2xl bg-slate-50 p-5 lg:rounded-s-[3rem] lg:rounded-tr-none lg:p-12 2xl:p-16">
+    <main className="relative z-20 flex h-full flex-1 flex-col overflow-y-auto overflow-x-hidden rounded-3xl rounded-t-2xl bg-slate-50 p-5 lg:rounded-s-[3rem] lg:rounded-tr-none lg:p-12 2xl:p-16 min-h-screen">
       <div className="mt-8 flex-1">
         <div
           id="todays-stats-tab"
@@ -48,7 +48,7 @@ function Dashboard() {
           aria-labelledby="todays-stats-tab-btn"
         >
           <div className="">
-            <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-4">
+            <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3">
               <div className="rounded-xl bg-secondary/10 p-5 2xl:col-span-2">
                 <div className="flex flex-wrap items-center justify-between gap-2 border-b-[3px] border-secondary/20 pb-2">
                   <div className="relative flex items-center gap-2 before:absolute before:-bottom-[11px] before:left-0 before:h-[3px] before:w-[calc(100%+.5rem)] before:bg-secondary">
@@ -109,7 +109,7 @@ function Dashboard() {
                 </div>
               </div>
 
-              <div className="grid gap-5 col-span-2 2xl:col-span-2">
+              <div className="grid gap-5 col-span-2 2xl:col-span-1">
 								<div className="rounded-xl bg-secondary/10 p-5">
 									<div className="flex flex-wrap items-center justify-between gap-2 border-b-[3px] border-secondary/20 pb-2">
 										<div className="relative flex items-center gap-2 before:absolute before:-bottom-[11px] before:left-0 before:h-[3px] before:w-[calc(100%+.5rem)] before:bg-secondary">
@@ -265,7 +265,7 @@ function Dashboard() {
                 </div>
               </div>
 
-              <div className="rounded-xl bg-secondary/10 p-5 2xl:col-span-2">
+              <div className="rounded-xl bg-secondary/10 p-5 2xl:col-span-1">
                 <div className="flex flex-wrap items-center justify-between gap-2 border-b-[3px] border-secondary/20 pb-2">
                   <div className="relative flex items-center gap-2 before:absolute before:-bottom-[11px] before:left-0 before:h-[3px] before:w-[calc(100%+.5rem)] before:bg-secondary">
                     <span className="rounded-lg bg-accent-1 p-1 text-primary">
