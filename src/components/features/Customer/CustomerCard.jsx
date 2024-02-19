@@ -1,13 +1,14 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CustomerForm from "./CustomerForm";
+import { createPortal } from "react-dom";
 
 function CustomerCard({ customer }) {
   const navigate = useNavigate();
   const [showForm, setShowForm] = useState(false);
 
-  const onCustomerClick = () => {
-    navigate(`/customer/${customer._id}`);
+  const openEditCustomerForm = () => {
+    setShowForm(true);
   };
 
   const handleOnCancel = () => {
@@ -17,15 +18,25 @@ function CustomerCard({ customer }) {
   const handleOnSave = async (formData) => {
     const rows = [formData];
 
-    const [editCustomer, { isLoading: isUpdating }] =
-      await useEditCustomerMutation(rows);
+    // Assuming useEditCustomerMutation is an asynchronous function that handles customer updates
+    try {
+      // Simulating a loading state while the update is being processed
+      setIsUpdating(true);
 
-    setShowForm(false);
+      // Perform the edit operation here
+      const [editCustomer, { isLoading }] = await useEditCustomerMutation(rows);
+
+      // After the update is done, hide the form
+      setShowForm(false);
+    } catch (error) {
+      // Handle errors appropriately
+    } finally {
+      // Reset the loading state
+      setIsUpdating(false);
+    }
   };
 
-  const openEditCustomerForm = (customer) => {
-    setShowForm(true);
-  };
+  const [isUpdating, setIsUpdating] = useState(false); // Define isUpdating state
 
   return (
     <>
@@ -36,24 +47,37 @@ function CustomerCard({ customer }) {
             handleOnCancel={handleOnCancel}
             handleOnSave={handleOnSave}
             isUpdating={isUpdating}
+            record={customer}
           />,
           document.getElementById("portal")
         )}
       <tr
         className="border-b dark:border-neutral-500"
-        onClick={onCustomerClick}
+        // onClick={onCustomerClick}
       >
-        <td className="cursor-pointer whitespace-nowrap px-6 py-4">{customer.firstName}</td>
-        <td className="cursor-pointer whitespace-nowrap px-6 py-4">{customer.lastName}</td>
-        <td className="cursor-pointer whitespace-nowrap px-6 py-4">{customer.email}</td>
-        <td className="whitespace-nowrap px-6 py-4">
+        <td className="px-6 py-4 cursor-pointer whitespace-nowrap">
+          {customer._id}
+        </td>
+        <td className="px-6 py-4 cursor-pointer whitespace-nowrap">
+          {customer.firstName} {customer.lastName}
+        </td>
+        <td className="px-6 py-4 cursor-pointer whitespace-nowrap">
+          {customer.bookingGoal}
+        </td>
+        <td className="px-6 py-4 cursor-pointer whitespace-nowrap">
+          {customer.activationGoal}
+        </td>
+        <td className="px-6 py-4 cursor-pointer whitespace-nowrap">
+          {customer.users.length}
+        </td>
+        <td className="px-6 py-4 whitespace-nowrap">
           <svg
             className="w-6 h-6 mx-auto  text-[#10113A] cursor-pointer"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            onClick={() => openEditCustomerForm(customer)}
+            onClick={openEditCustomerForm}
           >
             <path
               stroke="currentColor"

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "../../utils/Modal";
 
 function CustomerForm({
@@ -8,23 +8,54 @@ function CustomerForm({
   isUpdating,
   handleOnCancel,
 }) {
-  const [formData, setFormData] = useState(
-    record
-      ? record
-      : {
-          firstName: "",
-          lastName: "",
-          email: "",
-        }
-  );
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    bookingGoal: 0,
+    activationGoal: 0,
+    dashboardDisplay: "Both",
+    visibleDashboards: [],
+    users: [],
+    campaigns: [],
+  });
+
+  // If record is provided, populate the form data with it
+  useEffect(() => {
+    if (record) {
+      setFormData(record);
+    }
+  }, [record]);
 
   const handleOnChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  // Function to render form inputs dynamically based on schema keys
+  const renderFormInputs = () => {
+    const schemaKeys = Object.keys(formData);
+    return schemaKeys.map((key) => (
+      <div className="w-[40%] my-1" key={key}>
+        <div className="mb-1">
+          <label htmlFor={key} className="text-white">
+            {key.charAt(0).toUpperCase() + key.slice(1)}
+          </label>
+        </div>
+        <input
+          id={key}
+          type={typeof formData[key] === "number" ? "number" : "text"} // Adjust input type dynamically
+          value={formData[key]}
+          onChange={handleOnChange}
+          name={key}
+          className="p-1 rounded focus:shadow-outline focus:outline-none"
+        />
+      </div>
+    ));
+  };
+
   return (
     <div className="absolute rounded">
-      <div className=" fixed z-30 top-0 left-0 h-[100vh] w-full bg-slate-50 opacity-70 "></div>
+      <div className="fixed z-30 top-0 left-0 h-[100vh] w-full bg-slate-50 opacity-70 "></div>
       <Modal
         title={title}
         showCancel={true}
@@ -33,64 +64,28 @@ function CustomerForm({
         showSave={true}
         showLoading={isUpdating}
         handleOnCancel={() => {
+          // Reset form data and invoke cancel handler
           setFormData({
             firstName: "",
             lastName: "",
             email: "",
+            bookingGoal: 0,
+            activationGoal: 0,
+            dashboardDisplay: "Both",
+            visibleDashboards: [],
+            users: [],
+            campaigns: [],
           });
           handleOnCancel();
         }}
         handleOnSave={() => {
+          // Pass form data to save handler
           handleOnSave(formData);
         }}
       >
-        <form className="flex gap-4 justify-center">
-          <div className="flex flex-col justify-center">
-            <div className="self-center my-1">
-              <div className="mb-1">
-                <label htmlFor="firstName" className=" text-white">
-                  First Name
-                </label>
-              </div>
-              <input
-                id="firstName"
-                onChange={handleOnChange}
-                type="text"
-                value={formData.firstName}
-                name="firstName"
-                className="rounded  p-1 focus:shadow-outline focus:outline-none"
-              />
-            </div>
-            <div className="self-center my-1">
-              <div className="mb-1">
-                <label htmlFor="lastName" className=" text-white">
-                  Last Name
-                </label>
-              </div>
-              <input
-                id="lastName"
-                type="text"
-                onChange={handleOnChange}
-                name="lastName"
-                value={formData.lastName}
-                className="rounded  p-1 focus:shadow-outline focus:outline-none"
-              />
-            </div>
-            <div className="self-center my-1">
-              <div className="mb-1">
-                <label htmlFor="email" className=" text-white">
-                  Email
-                </label>
-              </div>
-              <input
-                id="email"
-                type="text"
-                value={formData.email}
-                onChange={handleOnChange}
-                name="email"
-                className="rounded  p-1 focus:shadow-outline focus:outline-none"
-              />
-            </div>
+        <form className="flex justify-center gap-4">
+          <div className="flex flex-wrap justify-between">
+            {renderFormInputs()}
           </div>
         </form>
       </Modal>
