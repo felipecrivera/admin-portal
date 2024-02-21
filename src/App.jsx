@@ -15,9 +15,11 @@ import { useState } from "react";
 import { AppContext } from "./components/context/AppContext";
 import Booking from "./components/features/Dashboard/Booking";
 import Activation from "./components/features/Dashboard/Activation";
+
 function App() {
   useEffect(() => {
     window.HSStaticMethods.autoInit();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.pathname]);
   const [ShowSwitchButton, setShowSwitchButton] = useState(false);
   return (

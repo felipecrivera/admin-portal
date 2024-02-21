@@ -6,18 +6,13 @@ import { useGetAllCampaignQuery } from "../../../redux/campaignApi";
 import Loading from "../../utils/Loading";
 import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../../layout/Navbar";
-import { AppContext } from "../../context/AppContext";
-import { useContext } from "react";
 function Booking() {
-  const { ShowSwitchButton, setShowSwitchButton } = useContext(AppContext);
-
   const params = useParams();
   const location = useLocation();
   const { customer } = location.state;
   const [data, setData] = useState([]);
   const [noOfBookings, setNoOfBookings] = useState();
   const [goalReachedPercent, setGoalReachedPercent] = useState();
-  const [noOfActivations, setNoOfActivations] = useState();
   const [noOfConversations, setNoOfConversations] = useState();
   const [conversationRate, setConversationRate] = useState();
   const [currentActiveFilter, setCurrentActiveFilter] = useState(1);
@@ -25,7 +20,6 @@ function Booking() {
   const {
     data: dashboardData,
     refetch: adminRefetch,
-    isLoading,
   } = useGetAdminDashboardQuery({ id: params.id, filter: currentActiveFilter });
 
   const {
@@ -44,7 +38,6 @@ function Booking() {
     if (dashboardData) {
       setData(dashboardData.records);
       setNoOfBookings(dashboardData.noOfBookings);
-      setNoOfActivations(dashboardData.noOfActivations);
       setNoOfConversations(dashboardData.noOfConversations);
 
       if (dashboardData.noOfConversations !== 0) {
@@ -63,7 +56,7 @@ function Booking() {
         setGoalReachedPercent(0);
       }
     }
-  }, [dashboardData]);
+  }, [dashboardData, customer]);
 
   const exportToCSV = (e) => {
     const worksheet = utils.json_to_sheet([
@@ -101,11 +94,9 @@ function Booking() {
           currentActiveFilter={currentActiveFilter}
           setCurrentActiveFilter={onTabChange}
         />
-        {ShowSwitchButton && (
-          <button className="font-semibold" onClick={switchToActivation}>
-            Switch to Activation Dashboard
-          </button>
-        )}
+        <button className="font-semibold" onClick={switchToActivation}>
+          Switch to Activation Dashboard
+        </button>
 
         <div className="mt-8 flex-1">
           <div>
