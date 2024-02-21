@@ -144,18 +144,21 @@ function CustomerForm({
                 </div>
                 <div className="self-center my-1">
                   <div className="mb-1">
-                    <label htmlFor="dashboardDisplay" className=" text-white">
+                    <label htmlFor="dashboardDisplay" className="text-white">
                       Dashboard Display
                     </label>
                   </div>
-                  <input
+                  <select
                     id="dashboardDisplay"
-                    type="text"
                     value={formData.dashboardDisplay}
                     onChange={handleOnChange}
                     name="dashboardDisplay"
-                    className="rounded  p-1 focus:shadow-outline focus:outline-none"
-                  />
+                    className="rounded p-1  focus:shadow-outline focus:outline-none"
+                  >
+                    <option value="Both">Both</option>
+                    <option value="Booking">Booking</option>
+                    <option value="Activation">Activation</option>
+                  </select>
                 </div>
                 <div className="self-center my-1">
                   <div className="mb-1">
