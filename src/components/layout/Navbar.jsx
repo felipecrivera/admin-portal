@@ -1,11 +1,7 @@
-import React from "react";
-
 function Navbar({ currentActiveFilter, setCurrentActiveFilter }) {
   return (
     <nav
       className="flex space-x-4 lg:space-x-8"
-      aria-label="Tabs"
-      role="tablist"
     >
       <button
         type="button"

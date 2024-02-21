@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 
-const defaultTheme = require("tailwindcss/defaultTheme");
+import defaultTheme from "tailwindcss/defaultTheme";
 
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}", './node_modules/preline/preline.js'],
@@ -75,6 +75,6 @@ export default {
 		},
 	},
   plugins: [
-	require('preline/plugin'),
+	import('preline/plugin'),
   ],
 };
