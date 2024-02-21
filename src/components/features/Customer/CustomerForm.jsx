@@ -15,7 +15,6 @@ function CustomerForm({
     bookingGoal: 0,
     activationGoal: 0,
     dashboardDisplay: "Both",
-    visibleDashboards: [],
     users: [],
     campaigns: [],
   });
@@ -50,7 +49,6 @@ function CustomerForm({
             bookingGoal: 0,
             activationGoal: 0,
             dashboardDisplay: "Both",
-            visibleDashboards: [],
             users: [],
             campaigns: [],
           });
@@ -159,21 +157,6 @@ function CustomerForm({
                     <option value="Booking">Booking</option>
                     <option value="Activation">Activation</option>
                   </select>
-                </div>
-                <div className="self-center my-1">
-                  <div className="mb-1">
-                    <label htmlFor="visibleDashboards" className=" text-white">
-                      Visible Dashboards
-                    </label>
-                  </div>
-                  <input
-                    id="visibleDashboards"
-                    type="text"
-                    value={formData.visibleDashboards}
-                    onChange={handleOnChange}
-                    name="visibleDashboards"
-                    className="rounded  p-1 focus:shadow-outline focus:outline-none"
-                  />
                 </div>
               </div>
             </div>
