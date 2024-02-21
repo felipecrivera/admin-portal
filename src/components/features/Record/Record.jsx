@@ -63,6 +63,8 @@ function Record(props) {
           await createConversation(processedData);
         } else {
           const csvColumnMapping = {
+            "Account ID": "AccountId",
+            "Account Name": "AccountName",
             "Activation Date": "activationDate",
             Company: "company",
             Campaign: "campaign",
