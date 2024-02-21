@@ -6,16 +6,22 @@ import { read, utils } from "xlsx";
 import {
   useGetRecordQuery,
   useCreateRecordMutation,
+  useCreateOneRecordMutation,
 } from "../../../redux/recordApi.js";
 import Loading from "../../utils/Loading.jsx";
-
+import { useCreateConversationMutation } from "../../../redux/conversationApi.js";
 function Record(props) {
-  const fileRef = useRef();
+  const recordsFileRef = useRef();
+  const conversationFileRef = useRef();
 
   const [showForm, setShowForm] = useState(false);
 
   const { data: records, isLoading } = useGetRecordQuery();
   const [createRecord, { isLoading: isUpdating }] = useCreateRecordMutation();
+  const [createConversation] = useCreateConversationMutation();
+
+  const [createOneRecord, { isLoading: creatingOneRecord }] =
+    useCreateOneRecordMutation();
 
   const onCreateRecordTap = () => {
     setShowForm(true);
@@ -38,55 +44,69 @@ function Record(props) {
         const workSheet = wb.Sheets[sheet];
 
         const data = utils.sheet_to_json(workSheet, { w: true });
-        console.log(data);
-        const csvColumnMapping = {
-          "Activation Date": "activationDate",
-          Company: "company",
-          Campaign: "campaign",
-          "First Name": "firstName",
-          "Last Name": "lastName",
-          Title: "title",
-          Phone: "phone",
-          Email: "email",
-          Address: "address",
-          City: "city",
-          State: "state",
-          "Zip Code": "zipCode",
-          Outcome: "outCome",
-          "Booking Date": "bookingDate",
-          "Booking Time": "bookingTime",
-          Notes: "notes",
-        };
+        if (e.target.name == "conversationFile") {
+          const csvColumnMapping = {
+            "# of Conversations": "count",
+            "Account ID": "AccountId",
+            "Account Name": "AccountName",
+            date: "date",
+          };
+          const processedData = data.map((item) => {
+            const obj = {};
 
-        let processedData = data.map((item) => {
-          const obj = {};
-          function convert(str) {
-            let date = new Date(str);
-            let mnth = ("0" + (date.getMonth() + 1)).slice(-2);
-            let day = ("0" + date.getDate()).slice(-2);
-            return [date.getFullYear(), mnth, day].join("-");
-          }
-          Object.keys(item).forEach((key) => {
-            if (
-              csvColumnMapping[key.trim()] == "bookingDate" ||
-              csvColumnMapping[key.trim()] == "activationDate"
-            ) {
-              obj[csvColumnMapping[key.trim()]] = convert(item[key]);
-            } else {
+            Object.keys(item).forEach((key) => {
               obj[csvColumnMapping[key.trim()]] = item[key];
+            });
+
+            return obj;
+          });
+          await createConversation(processedData);
+        } else {
+          const csvColumnMapping = {
+            "Activation Date": "activationDate",
+            Company: "company",
+            Campaign: "campaign",
+            "First Name": "firstName",
+            "Last Name": "lastName",
+            Title: "title",
+            Phone: "phone",
+            Email: "email",
+            Address: "address",
+            City: "city",
+            State: "state",
+            "Zip Code": "zipCode",
+            Outcome: "outCome",
+            "Booking Date": "bookingDate",
+            "Booking Time": "bookingTime",
+            Notes: "notes",
+          };
+
+          const processedData = data.map((item) => {
+            const obj = {};
+            function convert(str) {
+              let date = new Date(str);
+              let mnth = ("0" + (date.getMonth() + 1)).slice(-2);
+              let day = ("0" + date.getDate()).slice(-2);
+              return [date.getFullYear(), mnth, day].join("-");
             }
+            Object.keys(item).forEach((key) => {
+              if (
+                csvColumnMapping[key.trim()] == "bookingDate" ||
+                csvColumnMapping[key.trim()] == "activationDate"
+              ) {
+                obj[csvColumnMapping[key.trim()]] = convert(item[key]);
+              } else {
+                obj[csvColumnMapping[key.trim()]] = item[key];
+              }
+            });
+
+            return obj;
           });
 
-          return obj;
-        });
-
-        console.log(processedData);
-        createRecord(processedData).then((e) => {
-          console.log(e, "+_+_+_+")
-        }).catch((e) => {
-          console.log(e,"mmmmmmmmm")
-        })
+          await createRecord(processedData);
+        }
       };
+
       reader.readAsArrayBuffer(csvFile);
     }
   };
@@ -96,15 +116,15 @@ function Record(props) {
   };
 
   const handleOnSave = async (formData) => {
-    const rows = [formData];
-
-    createRecord(rows).then((e) => {
-      if (e.error) {
-        alert(e.error.data.message)
-      }
-    }).catch((e) => {
-      console.log(e)
-    })
+    createOneRecord(formData)
+      .then((e) => {
+        if (e.error) {
+          alert(e.error.data.message);
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
 
     setShowForm(false);
   };
@@ -123,31 +143,53 @@ function Record(props) {
         )}
       <main
         className={`relative z-20 flex h-full flex-1 flex-col overflow-y-auto overflow-x-hidden rounded-3xl rounded-t-2xl bg-slate-50 p-5 lg:rounded-s-[3rem] lg:rounded-tr-none lg:p-12 2xl:p-16 `}
-        style={{"minHeight": "100vh"}}
+        style={{ minHeight: "100vh" }}
       >
         <div className="hidden">
           <input
             hidden
-            ref={fileRef}
+            ref={recordsFileRef}
             onChange={handleParse}
             accept=".csv, .xlsx"
             type="file"
+            name="recordFile"
+          />
+        </div>
+        <div className="hidden">
+          <input
+            hidden
+            ref={conversationFileRef}
+            onChange={handleParse}
+            accept=".csv, .xlsx"
+            type="file"
+            name="conversationFile"
           />
         </div>
         <div className="w-full flex justify-end ">
           <button
+            type="button"
             onClick={onCreateRecordTap}
             className="p-2 mx-2 bg-[#10113A] text-white rounded"
           >
             Create record
           </button>
           <button
+            type="button"
             onClick={() => {
-              fileRef?.current?.click();
+              conversationFileRef?.current?.click();
             }}
             className="p-2 mx-2 bg-[#10113A] text-white rounded"
           >
-            Upload CSV
+            Upload CSV (Conversations)
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              recordsFileRef?.current?.click();
+            }}
+            className="p-2 mx-2 bg-[#10113A] text-white rounded"
+          >
+            Upload CSV (Records)
           </button>
         </div>
 
@@ -164,32 +206,67 @@ function Record(props) {
                       <table className="min-w-full text-left text-sm font-light">
                         <thead className="border-b font-medium dark:border-neutral-500">
                           <tr>
-                            <th scope="col" className="px-6 py-4">Activation Date</th>
-                            <th scope="col" className="px-6 py-4">Campaign</th>
-                            <th scope="col" className="px-6 py-4">Company</th>
-                            <th scope="col" className="px-6 py-4">First name</th>
-                            <th scope="col" className="px-6 py-4">Last name</th>
-                            <th scope="col" className="px-6 py-4">Title</th>
-                            <th scope="col" className="px-6 py-4">Email</th>
-                            <th scope="col" className="px-6 py-4">Phone</th>
-                            <th scope="col" className="px-6 py-4">Address</th>
-                            <th scope="col" className="px-6 py-4">City</th>
-                            <th scope="col" className="px-6 py-4">State</th>
-                            <th scope="col" className="px-6 py-4">Zip Code</th>
-                            <th scope="col" className="px-6 py-4">Outcome</th>
-                            <th scope="col" className="px-6 py-4">Notes</th>
+                            <th scope="col" className="px-6 py-4">
+                              Activation Date
+                            </th>
+                            <th scope="col" className="px-6 py-4">
+                              Campaign
+                            </th>
+                            <th scope="col" className="px-6 py-4">
+                              Company
+                            </th>
+                            <th scope="col" className="px-6 py-4">
+                              First name
+                            </th>
+                            <th scope="col" className="px-6 py-4">
+                              Last name
+                            </th>
+                            <th scope="col" className="px-6 py-4">
+                              Title
+                            </th>
+                            <th scope="col" className="px-6 py-4">
+                              Email
+                            </th>
+                            <th scope="col" className="px-6 py-4">
+                              Phone
+                            </th>
+                            <th scope="col" className="px-6 py-4">
+                              Address
+                            </th>
+                            <th scope="col" className="px-6 py-4">
+                              City
+                            </th>
+                            <th scope="col" className="px-6 py-4">
+                              State
+                            </th>
+                            <th scope="col" className="px-6 py-4">
+                              Zip Code
+                            </th>
+                            <th scope="col" className="px-6 py-4">
+                              Outcome
+                            </th>
+                            <th scope="col" className="px-6 py-4">
+                              Notes
+                            </th>
                           </tr>
                         </thead>
                         <tbody>
                           {records.map((item) => {
-                            return <SingleRecord key={item._id} record={item} />;
+                            return (
+                              <SingleRecord key={item._id} record={item} />
+                            );
                           })}
                         </tbody>
                       </table>
                     ) : (
-                      <p className="font-semibold mx-auto my-2">No records available</p>
+                      <p className="font-semibold mx-auto my-2">
+                        No records available
+                      </p>
                     ))}
-                </div></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </main>
     </>

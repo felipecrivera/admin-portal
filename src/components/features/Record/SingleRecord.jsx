@@ -37,20 +37,50 @@ function SingleRecord({ record }) {
         )}
 
       <tr className="border-b dark:border-neutral-500">
-        <td className="cursor-pointer whitespace-nowrap px-6 py-4"> {record.activationDate} </td>
-        <td className="cursor-pointer whitespace-nowrap px-6 py-4"> {record.campaign} </td>
-        <td className="cursor-pointer whitespace-nowrap px-6 py-4"> {record.company} </td>
-        <td className="cursor-pointer whitespace-nowrap px-6 py-4"> {record.firstName} </td>
-        <td className="cursor-pointer whitespace-nowrap px-6 py-4"> {record.lastName} </td>
-        <td className="cursor-pointer whitespace-nowrap px-6 py-4"> {record.title} </td>
-        <td className="cursor-pointer whitespace-nowrap px-6 py-4"> {record.email} </td>
-        <td className="cursor-pointer whitespace-nowrap px-6 py-4"> {record.phone} </td>
-        <td className="cursor-pointer whitespace-nowrap px-6 py-4"> {record.address} </td>
-        <td className="cursor-pointer whitespace-nowrap px-6 py-4"> {record.city} </td>
-        <td className="cursor-pointer whitespace-nowrap px-6 py-4"> {record.state} </td>
-        <td className="cursor-pointer whitespace-nowrap px-6 py-4"> {record.zipCode} </td>
-        <td className="cursor-pointer whitespace-nowrap px-6 py-4"> {record.outCome} </td>
-        <td className="cursor-pointer whitespace-nowrap px-6 py-4"> {record.notes} </td>
+        <td className="cursor-pointer whitespace-nowrap px-6 py-4">
+          {record.activationDate
+            ? new Date(record.activationDate)?.toLocaleDateString()
+            : ""}
+        </td>
+        <td className="cursor-pointer whitespace-nowrap px-6 py-4">
+          {record.campaign.name}
+        </td>
+        <td className="cursor-pointer whitespace-nowrap px-6 py-4">
+          {record.company}
+        </td>
+        <td className="cursor-pointer whitespace-nowrap px-6 py-4">
+          {record.firstName}
+        </td>
+        <td className="cursor-pointer whitespace-nowrap px-6 py-4">
+          {record.lastName}
+        </td>
+        <td className="cursor-pointer whitespace-nowrap px-6 py-4">
+          {record.title}
+        </td>
+        <td className="cursor-pointer whitespace-nowrap px-6 py-4">
+          {record.email}
+        </td>
+        <td className="cursor-pointer whitespace-nowrap px-6 py-4">
+          {record.phone}
+        </td>
+        <td className="cursor-pointer whitespace-nowrap px-6 py-4">
+          {record.address}
+        </td>
+        <td className="cursor-pointer whitespace-nowrap px-6 py-4">
+          {record.city}
+        </td>
+        <td className="cursor-pointer whitespace-nowrap px-6 py-4">
+          {record.state}
+        </td>
+        <td className="cursor-pointer whitespace-nowrap px-6 py-4">
+          {record.zipCode}
+        </td>
+        <td className="cursor-pointer whitespace-nowrap px-6 py-4">
+          {record.outCome}
+        </td>
+        <td className="cursor-pointer whitespace-nowrap px-6 py-4">
+          {record.notes}
+        </td>
         <td className="whitespace-nowrap px-6 py-4">
           <svg
             className="w-6 h-6 mx-auto  text-[#10113A] cursor-pointer"

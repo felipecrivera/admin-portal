@@ -57,7 +57,7 @@ function Report(props) {
   return (
     <main
       className={`relative mx-2 z-20 flex h-full flex-1 flex-col overflow-y-auto overflow-x-hidden rounded-3xl rounded-t-2xl bg-slate-50 p-5 lg:rounded-s-[3rem] lg:rounded-tr-none lg:p-12 2xl:p-16 `}
-      style={{"minHeight": "100vh"}}
+      style={{ minHeight: "100vh" }}
     >
       <div className="w-full flex justify-around my-4">
         <form onSubmit={search} className="flex gap-4 flex-col md:flex-row">
@@ -113,20 +113,51 @@ function Report(props) {
                       <thead className="border-b font-medium dark:border-neutral-500">
                         <tr className="">
                           <th scope="col" className="px-6 py-4"></th>
-                          <th scope="col" className="px-6 py-4">Activation Date</th>
-                          <th scope="col" className="px-6 py-4">Campaign</th>
-                          <th scope="col" className="px-6 py-4">Company</th>
-                          <th scope="col" className="px-6 py-4">First name</th>
-                          <th scope="col" className="px-6 py-4">Last name</th>
-                          <th scope="col" className="px-6 py-4">Title</th>
-                          <th scope="col" className="px-6 py-4">Email</th>
-                          <th scope="col" className="px-6 py-4">Phone</th>
-                          <th scope="col" className="px-6 py-4">Address</th>
-                          <th scope="col" className="px-6 py-4">City</th>
-                          <th scope="col" className="px-6 py-4">State</th>
-                          <th scope="col" className="px-6 py-4">Zip Code</th>
-                          <th scope="col" className="px-6 py-4">Outcome</th>
-                          <th scope="col" className="px-6 py-4">Notes</th>
+                          <th scope="col" className="px-6 py-4">
+                            Account Name
+                          </th>
+                          <th scope="col" className="px-6 py-4">
+                            Activation Date
+                          </th>
+                          <th scope="col" className="px-6 py-4">
+                            Campaign
+                          </th>
+                          <th scope="col" className="px-6 py-4">
+                            Company
+                          </th>
+                          <th scope="col" className="px-6 py-4">
+                            First name
+                          </th>
+                          <th scope="col" className="px-6 py-4">
+                            Last name
+                          </th>
+                          <th scope="col" className="px-6 py-4">
+                            Title
+                          </th>
+                          <th scope="col" className="px-6 py-4">
+                            Email
+                          </th>
+                          <th scope="col" className="px-6 py-4">
+                            Phone
+                          </th>
+                          <th scope="col" className="px-6 py-4">
+                            Address
+                          </th>
+                          <th scope="col" className="px-6 py-4">
+                            City
+                          </th>
+                          <th scope="col" className="px-6 py-4">
+                            State
+                          </th>
+                          <th scope="col" className="px-6 py-4">
+                            Zip Code
+                          </th>
+                          <th scope="col" className="px-6 py-4">
+                            Outcome
+                          </th>
+                          <th scope="col" className="px-6 py-4">
+                            Notes
+                          </th>
                         </tr>
                       </thead>
                       <tbody>
@@ -142,7 +173,9 @@ function Report(props) {
                       </tbody>
                     </table>
                   ) : (
-                    <p className="font-semibold mx-auto my-2">No reports available</p>
+                    <p className="font-semibold mx-auto my-2">
+                      No reports available
+                    </p>
                   ))}
               </div>
             </div>

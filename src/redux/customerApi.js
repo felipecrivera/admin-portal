@@ -26,6 +26,7 @@ export const customerApi = createApi({
           "Content-Type": "application/json",
         },
       }),
+      invalidatesTags: ["Customer"],
     }),
     editCustomer: builder.mutation({
       query: (customer) => ({
@@ -36,6 +37,7 @@ export const customerApi = createApi({
           "Content-Type": "application/json",
         },
       }),
+      invalidatesTags: ["Customer"],
     }),
     loginCustomer: builder.mutation({
       query: (customer) => ({
@@ -46,6 +48,7 @@ export const customerApi = createApi({
           "Content-Type": "application/json",
         },
       }),
+      invalidatesTags: ["Customer"],
     }),
     getCustomerDashboard: builder.query({
       query: (id) => ({

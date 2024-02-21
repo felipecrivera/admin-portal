@@ -2,13 +2,34 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CustomerForm from "./CustomerForm";
 import { createPortal } from "react-dom";
-
+import { useEditCustomerMutation } from "../../../redux/customerApi";
+import CampaignForm from "../Campaign/CampaignForm";
+import { useCreateCampaignMutation } from "../../../redux/campaignApi";
+import { FaAddressBook } from "react-icons/fa";
 function CustomerCard({ customer }) {
   const navigate = useNavigate();
   const [showForm, setShowForm] = useState(false);
+  const [showCampaignForm, setShowCampaignForm] = useState(false);
+
+  const [editCustomer, { isLoading: isUpdating }] = useEditCustomerMutation();
+  const [createCampaign, { isLoading: isCampaignUpdating }] =
+    useCreateCampaignMutation();
 
   const openEditCustomerForm = () => {
     setShowForm(true);
+  };
+  const handleOnCampaignCancel = () => {
+    setShowCampaignForm(false);
+  };
+
+  const handleOnCampaignSave = async (formData) => {
+    const updatedData = { ...formData, customer: customer._id };
+    await createCampaign(updatedData);
+    setShowCampaignForm(false);
+  };
+
+  const openCreateCampaignForm = () => {
+    setShowCampaignForm(true);
   };
 
   const handleOnCancel = () => {
@@ -16,27 +37,19 @@ function CustomerCard({ customer }) {
   };
 
   const handleOnSave = async (formData) => {
-    const rows = [formData];
-
-    // Assuming useEditCustomerMutation is an asynchronous function that handles customer updates
-    try {
-      // Simulating a loading state while the update is being processed
-      setIsUpdating(true);
-
-      // Perform the edit operation here
-      const [editCustomer, { isLoading }] = await useEditCustomerMutation(rows);
-
-      // After the update is done, hide the form
-      setShowForm(false);
-    } catch (error) {
-      // Handle errors appropriately
-    } finally {
-      // Reset the loading state
-      setIsUpdating(false);
-    }
+    await editCustomer(formData);
+    setShowForm(false);
   };
 
-  const [isUpdating, setIsUpdating] = useState(false); // Define isUpdating state
+  const openUserList = () => {
+    console.log("openUserList");
+    console.log(customer);
+    navigate(`/users/${customer._id}`, { state: { id: customer._id } });
+  };
+
+  const onCustomerClick = () => {
+    navigate(`/customer/${customer._id}`, { state: { customer: customer } });
+  };
 
   return (
     <>
@@ -51,24 +64,46 @@ function CustomerCard({ customer }) {
           />,
           document.getElementById("portal")
         )}
-      <tr
-        className="border-b dark:border-neutral-500"
-        // onClick={onCustomerClick}
-      >
-        <td className="px-6 py-4 cursor-pointer whitespace-nowrap">
-          {customer._id}
+      {showCampaignForm &&
+        createPortal(
+          <CampaignForm
+            title="Create campaign"
+            handleOnCancel={handleOnCampaignCancel}
+            handleOnSave={handleOnCampaignSave}
+            isUpdating={isCampaignUpdating}
+            record={customer}
+          />,
+          document.getElementById("portal")
+        )}
+      <tr className="border-b dark:border-neutral-500">
+        <td
+          className="px-6 py-4 cursor-pointer whitespace-nowrap"
+          onClick={onCustomerClick}
+        >
+          {customer.AccountId}
         </td>
-        <td className="px-6 py-4 cursor-pointer whitespace-nowrap">
-          {customer.firstName} {customer.lastName}
+        <td
+          className="px-6 py-4 cursor-pointer whitespace-nowrap"
+          onClick={onCustomerClick}
+        >
+          {customer.AccountName}
         </td>
-        <td className="px-6 py-4 cursor-pointer whitespace-nowrap">
+        <td
+          className="px-6 py-4 cursor-pointer whitespace-nowrap"
+          onClick={onCustomerClick}
+        >
           {customer.bookingGoal}
         </td>
-        <td className="px-6 py-4 cursor-pointer whitespace-nowrap">
+        <td
+          className="px-6 py-4 cursor-pointer whitespace-nowrap"
+          onClick={onCustomerClick}
+        >
           {customer.activationGoal}
         </td>
         <td className="px-6 py-4 cursor-pointer whitespace-nowrap">
-          {customer.users.length}
+          <button className="underline text-blue-700" onClick={openUserList}>
+            {customer.users.length}
+          </button>
         </td>
         <td className="px-6 py-4 whitespace-nowrap">
           <svg
@@ -87,6 +122,13 @@ function CustomerCard({ customer }) {
               d="m14.3 4.8 2.9 2.9M7 7H4a1 1 0 0 0-1 1v10c0 .6.4 1 1 1h11c.6 0 1-.4 1-1v-4.5m2.4-10a2 2 0 0 1 0 3l-6.8 6.8L8 14l.7-3.6 6.9-6.8a2 2 0 0 1 2.8 0Z"
             />
           </svg>
+        </td>
+
+        <td className="px-6 py-4 whitespace-nowrap">
+          <FaAddressBook
+            className="w-6 h-6 mx-auto  text-[#10113A] cursor-pointer"
+            onClick={openCreateCampaignForm}
+          />
         </td>
       </tr>
     </>

@@ -41,6 +41,18 @@ export const recordApi = createApi({
       }),
       invalidatesTags: ["Record"],
     }),
+    createOneRecord: builder.mutation({
+      query: (records) => ({
+        url: `/createOne`,
+        method: "POST",
+        body: records,
+        headers: {
+          "Content-Type": "application/json",
+          "x-access-token": localStorage.getItem("token"),
+        },
+      }),
+      invalidatesTags: ["Record"],
+    }),
   }),
 });
 
@@ -48,4 +60,5 @@ export const {
   useGetRecordQuery,
   useUpdateRecordMutation,
   useCreateRecordMutation,
+  useCreateOneRecordMutation,
 } = recordApi;

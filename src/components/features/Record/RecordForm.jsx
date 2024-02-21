@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "../../utils/Modal";
+import { useGetAllCampaignQuery } from "../../../redux/campaignApi";
+import { useGetCustomersQuery } from "../../../redux/customerApi";
 
 function RecordForm({
   record,
@@ -13,6 +15,7 @@ function RecordForm({
       ? record
       : {
           campaign: "",
+          customer: "",
           activationDate: "",
           company: "",
           title: "",
@@ -30,9 +33,20 @@ function RecordForm({
           bookingTime: "",
         }
   );
+  const { data: campaigns, isLoading: isCampaignLoading } =
+    useGetAllCampaignQuery(formData.customer);
+  const { data: customers, isLoading } = useGetCustomersQuery();
 
   const handleOnChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleOnCustomerChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      campaign: "",
+      customer: e.target.value,
+    }));
   };
 
   return (
@@ -47,6 +61,7 @@ function RecordForm({
         showLoading={isUpdating}
         handleOnCancel={() => {
           setFormData({
+            customer: "",
             campaign: "",
             activationDate: "",
             company: "",
@@ -72,21 +87,29 @@ function RecordForm({
       >
         <form className="flex gap-4 justify-center">
           <div className="flex flex-col justify-center">
-            <div className="self-center my-1">
+            <div className="self-center w-full my-1">
               <div className="mb-1">
-                <label htmlFor="campaign" className="  text-white">
-                  Campaign
+                <label htmlFor="customer" className="  text-white">
+                  Customer
                 </label>
               </div>
-
-              <input
-                id="campaign"
-                type="text"
-                name="campaign"
-                value={formData.campaign}
+              <select
+                id="customer"
+                name="customer"
+                value={formData.customer}
                 className="rounded p-1  focus:shadow-outline focus:outline-none"
-                onChange={handleOnChange}
-              />
+                onChange={handleOnCustomerChange}
+              >
+                <option value=""> Select Customer </option>
+                {customers &&
+                  customers.map((item) => {
+                    return (
+                      <option key={item._id} value={item._id}>
+                        {item.AccountName}
+                      </option>
+                    );
+                  })}
+              </select>
             </div>
             <div className="self-center my-1 w-full">
               <div className="mb-1">
@@ -196,6 +219,32 @@ function RecordForm({
             </div>
           </div>
           <div className="flex flex-col justify-center">
+            <div className="self-center w-full my-1">
+              <div className="mb-1">
+                <label htmlFor="campaign" className=" text-white">
+                  Campaign
+                </label>
+              </div>
+
+              <select
+                id="campaign"
+                type="text"
+                name="campaign"
+                value={formData.campaign}
+                className="rounded p-1  focus:shadow-outline focus:outline-none"
+                onChange={handleOnChange}
+              >
+                <option value=""> Select Campaign </option>
+                {campaigns &&
+                  campaigns.map((item) => {
+                    return (
+                      <option key={item._id} value={item._id}>
+                        {item.name}
+                      </option>
+                    );
+                  })}
+              </select>
+            </div>
             <div className="self-center my-1">
               <div className="mb-1">
                 <label htmlFor="phone" className=" text-white">
@@ -273,22 +322,25 @@ function RecordForm({
                 className="rounded  p-1 focus:shadow-outline focus:outline-none"
               />
             </div>
-            <div className="self-center my-1">
+            <div className="self-center w-full my-1">
               <div className="mb-1">
                 <label htmlFor="outCome" className=" text-white">
                   Outcome
                 </label>
               </div>
-              <input
+              <select
                 id="outCome"
-                type="text"
                 value={formData.outCome}
                 onChange={handleOnChange}
                 name="outCome"
                 className="rounded  p-1 focus:shadow-outline focus:outline-none"
-              />
+              >
+                <option value={""}> Select Outcome</option>
+                <option value={"Booked Appt"}> Booked Appt</option>
+                <option value={"Send Info"}> Send Info</option>
+                <option value={"Callback"}> Callback</option>
+              </select>
             </div>
-
             <div className="self-center my-1">
               <div className="mb-1">
                 <label htmlFor="notes" className=" text-white">

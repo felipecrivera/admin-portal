@@ -37,11 +37,12 @@ function Signin() {
       localStorage.setItem("isUserLoggedIn", true);
       const { admin, token } = payload;
       localStorage.setItem("token", token);
+      localStorage.setItem("customer", JSON.stringify(admin));
       navigate("/");
     } catch (error) {
       localStorage.setItem("isUserLoggedIn", false);
       console.error("rejected", error);
-      setError(error.data.message)
+      setError(error.data.message);
     }
   };
   return (
