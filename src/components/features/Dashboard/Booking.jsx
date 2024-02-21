@@ -42,7 +42,7 @@ function Booking() {
 
       if (dashboardData.noOfConversations !== 0) {
         setConversationRate(
-          (dashboardData.noOfBookings / dashboardData.noOfConversations) * 100
+          Number.parseFloat(((dashboardData.noOfBookings / dashboardData.noOfConversations) * 100)).toFixed(2)
         );
       } else {
         setConversationRate(0);
@@ -115,7 +115,7 @@ function Booking() {
                           <path d="M15.349 1.395h-2.093V.698a.698.698 0 0 0-1.396 0v.697H4.885V.698a.698.698 0 1 0-1.396 0v.697H1.395A1.395 1.395 0 0 0 0 2.791v13.953a1.395 1.395 0 0 0 1.395 1.396H15.35a1.395 1.395 0 0 0 1.395-1.396V2.791a1.395 1.395 0 0 0-1.395-1.396ZM3.489 2.791v.697a.698.698 0 0 0 1.395 0v-.697h6.976v.697a.698.698 0 0 0 1.396 0v-.697h2.093v2.79H1.395v-2.79h2.093Zm11.86 13.953H1.395V6.977H15.35v9.767ZM6.977 9.07v5.581a.698.698 0 1 1-1.396 0v-4.453l-.385.194a.698.698 0 1 1-.624-1.249l1.395-.698a.698.698 0 0 1 1.01.625Zm5.159 2.655-1.67 2.229h1.395a.698.698 0 0 1 0 1.395H9.07a.697.697 0 0 1-.558-1.116l2.51-3.347a.697.697 0 1 0-1.161-.77.697.697 0 1 1-1.208-.697 2.093 2.093 0 1 1 3.483 2.306Z" />
                         </svg>
                       </span>
-                      <h6 className="text-base font-medium">Appointments</h6>
+                      <h6 className="text-base font-medium">Bookings</h6>
                     </div>
 
                     <div className="flex items-center gap-px text-sm font-medium text-primary">
@@ -144,9 +144,9 @@ function Booking() {
                       <p className="font-semibold">Progress Tracker</p>
                       <p>
                         <span className="font-medium text-secondary">
-                          {Math.abs(100 - goalReachedPercent)}%
+                          {Number.parseFloat(100 - goalReachedPercent).toFixed(2)} %
                         </span>
-                        to goal
+                        {" "}to goal
                       </p>
                     </div>
 
