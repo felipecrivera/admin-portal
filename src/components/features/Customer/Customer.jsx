@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { useGetCustomersQuery } from "../../../redux/customerApi";
 import Loading from "../../utils/Loading";
 import CustomerCard from "./CustomerCard";
-import { useCreateUserMutation } from "../../../redux/userApi";
-import UserForm from "../User/UserForm";
+import { useCreateCustomerMutation } from "../../../redux/customerApi";
+import CustomerForm from "../Customer/CustomerForm";
 import { createPortal } from "react-dom";
 
 function Customer() {
   const { data: customers, isLoading } = useGetCustomersQuery();
-  const [createUser, { isLoading: isUpdating }] = useCreateUserMutation();
+  const [createCustomer, { isLoading: isUpdating }] = useCreateCustomerMutation();
 
   const [showForm, setShowForm] = useState(false);
   const handleOnCancel = () => {
@@ -16,19 +16,11 @@ function Customer() {
   };
 
   const handleOnSave = async (formData) => {
-    createUser(formData)
-      .then((e) => {
-        if (e.error) {
-          alert(e.error.data.message);
-        }
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-    location.reload()
+    await createCustomer(formData);
     setShowForm(false);
   };
-  const onAddUserTap = () => {
+
+  const onAddCustomerTap = () => {
     setShowForm(true);
   };
 
@@ -36,8 +28,8 @@ function Customer() {
     <>
       {showForm &&
         createPortal(
-          <UserForm
-            title="Create user"
+          <CustomerForm
+            title="Edit customer"
             handleOnCancel={handleOnCancel}
             handleOnSave={handleOnSave}
             isUpdating={isUpdating}
@@ -50,10 +42,10 @@ function Customer() {
       >
         <div className="w-full flex justify-end ">
           <button
-            onClick={onAddUserTap}
+            onClick={onAddCustomerTap}
             className="p-2 mx-2 bg-[#10113A] text-white rounded"
           >
-            Add user
+            Add customer
           </button>
         </div>
         <div className="flex flex-col">
