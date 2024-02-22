@@ -47,6 +47,36 @@ function UserForm({ record, title, handleOnSave, isUpdating, handleOnCancel }) {
         }}
       >
         <form className="flex gap-4 justify-center flex-col ">
+          {title == "Create user" ? (
+            <div className="self-center my-1 flex-grow">
+              <div className="mb-1">
+                <label htmlFor="customer" className=" text-white">
+                  Select Customer
+                </label>
+              </div>
+              <select
+                id="customer"
+                type="text"
+                onInput={handleOnChange}
+                value={formData.customer}
+                name="customer"
+                className="rounded w-full  p-1 focus:shadow-outline focus:outline-none"
+              >
+                <option value=""> Select Customer </option>
+                {customers &&
+                  customers.map((item) => {
+                    return (
+                      <option key={item._id} value={item._id}>
+                        {item.AccountName}
+                      </option>
+                    );
+                  })}
+              </select>
+            </div>
+          ) : (
+            <></>
+          )}
+
           <div className="self-center my-1 ">
             <div className="mb-1">
               <label htmlFor="title" className=" text-white">
