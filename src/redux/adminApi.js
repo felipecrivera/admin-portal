@@ -48,8 +48,8 @@ export const adminApi = createApi({
       }),
     }),
     getAdminDashboard: builder.query({
-      query: ({ id, filter }) => ({
-        url: `/getDashboard/${id}`,
+      query: ({ id, filter, type }) => ({
+        url: `/getDashboard/${type}/${id}`,
         method: "POST",
         body: { filter },
         headers: {

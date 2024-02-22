@@ -3,14 +3,18 @@ import SingleReport from "./SingleReport";
 import Loading from "../../utils/Loading";
 import { useSearchRecordsQuery } from "../../../redux/reportApi";
 import { utils, writeFile } from "xlsx";
+import { useSearchParams } from "react-router-dom";
 
 function Report(props) {
+
+  const [searchParams] = useSearchParams()
+  const campaignId = searchParams.get("campaign")
   const searchTermRef = useRef();
   const startDateRef = useRef();
   const endDateRef = useRef();
 
-  const [searchQuery, setSearchQuery] = useState("");
-  const { data: records, isLoading } = useSearchRecordsQuery(searchQuery);
+  const [searchQuery, setSearchQuery] = useState("campaign=" + campaignId);
+  const { data: records, isLoading } = useSearchRecordsQuery(searchQuery, campaignId);
 
   const search = (e) => {
     e.preventDefault();
@@ -23,6 +27,9 @@ function Report(props) {
 
     if (endDateRef.current.value)
       urlParams.set("endDate", endDateRef.current.value);
+    
+    if (campaignId)
+      urlParams.set("campaign", campaignId);
 
     const urlSearchQuery = urlParams.toString();
     setSearchQuery(urlSearchQuery);

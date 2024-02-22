@@ -28,6 +28,7 @@ function Activation({}) {
   } = useGetAdminDashboardQuery({
     id: customer._id,
     filter: currentActiveFilter,
+    type: 'Activation'
   });
 
   const {
@@ -60,7 +61,7 @@ function Activation({}) {
 
       if (customer && customer.activationGoal && customer.activationGoal != 0) {
         setGoalReachedPercent(
-          (dashboardData?.noOfActivations / customer.activationGoal) * 100
+          (dashboardData?.noOfActivations / customer.activationGoal / dashboardData.dayCnt) * 100
         );
       } else {
         setGoalReachedPercent(0);
@@ -93,6 +94,7 @@ function Activation({}) {
     utils.book_append_sheet(workbook, worksheet, "Sheet1");
     writeFile(workbook, "Report.xlsx");
   };
+  
   const switchToBooking = () => {
     navigate(`/bookings/${customer._id}`, { state: { customer: customer } });
   };
@@ -103,11 +105,9 @@ function Activation({}) {
           currentActiveFilter={currentActiveFilter}
           setCurrentActiveFilter={onTabChange}
         />
-        {ShowSwitchButton && (
-          <button className="font-semibold" onClick={switchToBooking}>
-            Switch to Booking Dashboard
-          </button>
-        )}
+        <button className="font-semibold" onClick={switchToBooking}>
+          Switch to Booking Dashboard
+        </button>
         <div className="mt-8 flex-1">
           <div>
             <div className="">
@@ -145,7 +145,7 @@ function Activation({}) {
 
                   <div className="px-4 py-6 lg:p-8">
                     <h2 className="text-5xl font-medium lg:text-8xl">
-                      {noOfBookings}
+                      {noOfActivations}
                     </h2>
                   </div>
 
@@ -154,8 +154,11 @@ function Activation({}) {
                       <p className="font-semibold">Progress Tracker</p>
                       <p>
                         <span className="font-medium text-secondary">
-                          {Math.abs(100 - goalReachedPercent)}%
-                        </span>
+                          {Number.parseFloat(
+                            Math.abs(100 - goalReachedPercent)
+                          ).toFixed(2)}{" "}
+                          %
+                        </span>{" "}
                         to goal
                       </p>
                     </div>
@@ -251,7 +254,7 @@ function Activation({}) {
 
                     <div className="px-4 pt-4 lg:px-8">
                       <h2 className="text-5xl font-medium">
-                        {conversationRate}%
+                        {Number.parseFloat(conversationRate).toFixed(2)} %
                       </h2>
                     </div>
                   </div>
@@ -278,36 +281,42 @@ function Activation({}) {
                       {isCampaignLoading && <Loading />}
                       {campaigns &&
                         !isCampaignLoading &&
-                        campaigns.map((item) => {
-                          return (
-                            <div key={item._id}>
-                              <div className="flex justify-between mt-6">
-                                <div>
-                                  <h6 className="font-semibold">
-                                    Campaign name
-                                  </h6>
-                                  <div className="text-base font-medium whitespace-pre">
-                                    {item.name}
+                        campaigns
+                          .filter((e) => e.type == "Activate")
+                          .map((item) => {
+                            return (
+                              <div key={item._id}>
+                                <a href={"/report?campaign=" + item._id}>
+                                  <div className="flex justify-between mt-6">
+                                    <div>
+                                      <h6 className="font-semibold">
+                                        Campaign name
+                                      </h6>
+                                      <div className="text-base font-medium whitespace-pre">
+                                        {item.name}
+                                      </div>
+                                    </div>
+                                    <div>
+                                      <h6 className="font-semibold">
+                                        Description
+                                      </h6>
+                                      <div className="text-base font-medium whitespace-pre">
+                                        {item.description}
+                                      </div>
+                                    </div>
+                                    <div>
+                                      <h6 className="font-semibold">Type</h6>
+                                      <div className="text-base font-medium whitespace-pre">
+                                        {item.type}
+                                      </div>
+                                    </div>
                                   </div>
-                                </div>
-                                <div>
-                                  <h6 className="font-semibold">Description</h6>
-                                  <div className="text-base font-medium whitespace-pre">
-                                    {item.description}
-                                  </div>
-                                </div>
-                                <div>
-                                  <h6 className="font-semibold">Type</h6>
-                                  <div className="text-base font-medium whitespace-pre">
-                                    {item.type}
-                                  </div>
-                                </div>
-                              </div>
 
-                              <div className="h-[2px] space-y-2 bg-secondary/15 my-3"></div>
-                            </div>
-                          );
-                        })}
+                                  <div className="h-[2px] space-y-2 bg-secondary/15 my-3"></div>
+                                </a>
+                              </div>
+                            );
+                          })}
                     </div>
                   </div>
                 </div>
@@ -331,37 +340,41 @@ function Activation({}) {
 
                   <div className="py-4 p-1 lg:p-1">
                     {data &&
-                      data.map((e, i) => (
-                        <React.Fragment key={i}>
-                          <div className="flex justify-between mt-6">
-                            <div>
-                              <h6 className="text-base font-medium ">
-                                {e.title}
-                              </h6>
+                      data
+                        .filter(
+                          (e) => e.outCome == "Send Info" || e.outCome == "Callback"
+                        )
+                        .map((e, i) => (
+                          <React.Fragment key={i}>
+                            <div className="flex justify-between mt-6">
+                              <div>
+                                <h6 className="text-base font-medium ">
+                                  {e.title}
+                                </h6>
+                              </div>
+                              <div className="">
+                                <button onClick={() => exportToCSV(e)}>
+                                  <svg
+                                    className="myhover"
+                                    width="20px"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path
+                                      d="M5.25589 16C3.8899 15.0291 3 13.4422 3 11.6493C3 9.20008 4.8 6.9375 7.5 6.5C8.34694 4.48637 10.3514 3 12.6893 3C15.684 3 18.1317 5.32251 18.3 8.25C19.8893 8.94488 21 10.6503 21 12.4969C21 14.0582 20.206 15.4339 19 16.2417M12 21V11M12 21L9 18M12 21L15 18"
+                                      stroke="#000000"
+                                      strokeWidth="2"
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                    />
+                                  </svg>
+                                </button>
+                              </div>
                             </div>
-                            <div className="">
-                              <button onClick={() => exportToCSV(e)}>
-                                <svg
-                                  className="myhover"
-                                  width="20px"
-                                  viewBox="0 0 24 24"
-                                  fill="none"
-                                  xmlns="http://www.w3.org/2000/svg"
-                                >
-                                  <path
-                                    d="M5.25589 16C3.8899 15.0291 3 13.4422 3 11.6493C3 9.20008 4.8 6.9375 7.5 6.5C8.34694 4.48637 10.3514 3 12.6893 3C15.684 3 18.1317 5.32251 18.3 8.25C19.8893 8.94488 21 10.6503 21 12.4969C21 14.0582 20.206 15.4339 19 16.2417M12 21V11M12 21L9 18M12 21L15 18"
-                                    stroke="#000000"
-                                    strokeWidth="2"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                  />
-                                </svg>
-                              </button>
-                            </div>
-                          </div>
-                          <div className="h-[2px] space-y-2 bg-secondary/15 my-3"></div>
-                        </React.Fragment>
-                      ))}
+                            <div className="h-[2px] space-y-2 bg-secondary/15 my-3"></div>
+                          </React.Fragment>
+                        ))}
                   </div>
                 </div>
               </div>

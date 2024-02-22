@@ -20,7 +20,7 @@ function Booking() {
   const {
     data: dashboardData,
     refetch: adminRefetch,
-  } = useGetAdminDashboardQuery({ id: params.id, filter: currentActiveFilter });
+  } = useGetAdminDashboardQuery({ id: params.id, filter: currentActiveFilter, type: 'Booking' });
 
   const {
     data: campaigns,
@@ -50,7 +50,7 @@ function Booking() {
 
       if (customer && customer.bookingGoal && customer.bookingGoal != 0) {
         setGoalReachedPercent(
-          (dashboardData?.noOfBookings / customer.bookingGoal) * 100
+          (dashboardData?.noOfBookings / customer.bookingGoal / dashboardData.dayCnt) * 100
         );
       } else {
         setGoalReachedPercent(0);
@@ -268,33 +268,35 @@ function Booking() {
                       {isCampaignLoading && <Loading />}
                       {campaigns &&
                         !isCampaignLoading &&
-                        campaigns.map((item) => {
+                        campaigns.filter((e) => e.type== 'Boost').map((item) => {
                           return (
                             <div key={item._id}>
-                              <div className="flex justify-between mt-6">
-                                <div>
-                                  <h6 className="font-semibold">
-                                    Campaign name
-                                  </h6>
-                                  <div className="text-base font-medium whitespace-pre">
-                                    {item.name}
+                              <a href={"/report?campaign=" + item._id}>
+                                <div className="flex justify-between mt-6">
+                                  <div>
+                                    <h6 className="font-semibold">
+                                      Campaign name
+                                    </h6>
+                                    <div className="text-base font-medium whitespace-pre">
+                                      {item.name}
+                                    </div>
+                                  </div>
+                                  <div>
+                                    <h6 className="font-semibold">Description</h6>
+                                    <div className="text-base font-medium whitespace-pre">
+                                      {item.description}
+                                    </div>
+                                  </div>
+                                  <div>
+                                    <h6 className="font-semibold">Type</h6>
+                                    <div className="text-base font-medium whitespace-pre">
+                                      {item.type}
+                                    </div>
                                   </div>
                                 </div>
-                                <div>
-                                  <h6 className="font-semibold">Description</h6>
-                                  <div className="text-base font-medium whitespace-pre">
-                                    {item.description}
-                                  </div>
-                                </div>
-                                <div>
-                                  <h6 className="font-semibold">Type</h6>
-                                  <div className="text-base font-medium whitespace-pre">
-                                    {item.type}
-                                  </div>
-                                </div>
-                              </div>
 
-                              <div className="h-[2px] space-y-2 bg-secondary/15 my-3"></div>
+                                <div className="h-[2px] space-y-2 bg-secondary/15 my-3"></div>
+                              </a>
                             </div>
                           );
                         })}
@@ -321,7 +323,7 @@ function Booking() {
 
                   <div className="py-4 p-1 lg:p-1">
                     {data &&
-                      data.map((e, i) => (
+                      data.filter((e) => (e.outCome == 'Booked Appt')).map((e, i) => (
                         <React.Fragment key={i}>
                           <div className="flex justify-between mt-6">
                             <div>
