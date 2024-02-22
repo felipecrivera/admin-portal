@@ -10,7 +10,7 @@ export const userApi = createApi({
     getAllUser: builder.query({
       query: (id) => ({
         url: `/getAllUser/${id}`,
-        method: "GET",
+        method: "POST",
         headers: {
           "x-access-token": localStorage.getItem("token"),
         },

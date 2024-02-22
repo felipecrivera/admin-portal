@@ -10,7 +10,7 @@ export const campaignApi = createApi({
     getAllCampaign: builder.query({
       query: (id) => ({
         url: `/getAllCampaign/${id}`,
-        method: "GET",
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
           "x-access-token": localStorage.getItem("token"),
