@@ -123,6 +123,9 @@ function Report(props) {
                         <tr className="">
                           <th scope="col" className="px-6 py-4"></th>
                           <th scope="col" className="px-6 py-4">
+                            Account Id
+                          </th>
+                          <th scope="col" className="px-6 py-4">
                             Account Name
                           </th>
                           <th scope="col" className="px-6 py-4">

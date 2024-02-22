@@ -15,6 +15,9 @@ function SingleReport({ report, handleExporting }) {
         />
       </td>
       <td className="cursor-pointer whitespace-nowrap px-6 py-4">
+        {report.customer.AccountId}
+      </td>
+      <td className="cursor-pointer whitespace-nowrap px-6 py-4">
         {report.customer.AccountName}
       </td>
       <td className="cursor-pointer whitespace-nowrap px-6 py-4">
