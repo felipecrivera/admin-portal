@@ -20,8 +20,8 @@ function Activation({}) {
   const [prevnoOfActivations, setPrevNoOfActivations] = useState();
   const [noOfConversations, setNoOfConversations] = useState();
   const [noOfPrevConversations, setNoOfPrevConversations] = useState();
-  const [conversationRate, setConversationRate] = useState();
-  const [prevconversationRate, setPrevConversationRate] = useState();
+  const [conversationRate, setConversationRate] = useState(0);
+  const [prevconversationRate, setPrevConversationRate] = useState(0);
   const [currentActiveFilter, setCurrentActiveFilter] = useState(1);
   const { ShowSwitchButton, setShowSwitchButton } = useContext(AppContext);
 
@@ -155,7 +155,7 @@ function Activation({}) {
                           <path d="M10.072 0a10.072 10.072 0 1 0 10.072 10.072A10.082 10.082 0 0 0 10.072 0Zm0 18.594a8.522 8.522 0 1 1 8.522-8.522 8.532 8.532 0 0 1-8.522 8.522Zm3.647-9.845a.774.774 0 1 1-1.096 1.096l-1.776-1.777v5.877a.775.775 0 1 1-1.55 0V8.069L7.521 9.845A.775.775 0 1 1 6.425 8.75l3.099-3.1a.775.775 0 0 1 1.096 0l3.099 3.1Z" />
                         </svg>
                       </span>
-                      <span className="">{ noOfActivations > prevnoOfActivations ? "-" : "+"}{prevnoOfActivations ? (noOfActivations - prevnoOfActivations) / prevnoOfActivations * 100 : 100} % </span>
+                      <span className="">{ noOfActivations < prevnoOfActivations ? "-" : "+"}{prevnoOfActivations ? (noOfActivations - prevnoOfActivations) / prevnoOfActivations * 100 : 100} % </span>
                     </div>
                   </div>
 
@@ -223,7 +223,7 @@ function Activation({}) {
                             <path d="M10.072 0a10.072 10.072 0 1 0 10.072 10.072A10.082 10.082 0 0 0 10.072 0Zm0 18.594a8.522 8.522 0 1 1 8.522-8.522 8.532 8.532 0 0 1-8.522 8.522Zm3.647-9.845a.774.774 0 1 1-1.096 1.096l-1.776-1.777v5.877a.775.775 0 1 1-1.55 0V8.069L7.521 9.845A.775.775 0 1 1 6.425 8.75l3.099-3.1a.775.775 0 0 1 1.096 0l3.099 3.1Z"></path>
                           </svg>
                         </span>
-                        <span className="">{noOfConversations > noOfPrevConversations ? "+" : "-"} { noOfPrevConversations ? (( noOfConversations - noOfPrevConversations) / noOfPrevConversations * 100) : "100"}% </span>
+                        <span className="">{noOfConversations < noOfPrevConversations ? "-" : "+"} { noOfPrevConversations ? (( noOfConversations - noOfPrevConversations) / noOfPrevConversations * 100) : "100"}% </span>
                       </div>
                     </div>
 
@@ -264,7 +264,7 @@ function Activation({}) {
                             <path d="M10.072 0a10.072 10.072 0 1 0 10.072 10.072A10.082 10.082 0 0 0 10.072 0Zm0 18.594a8.522 8.522 0 1 1 8.522-8.522 8.532 8.532 0 0 1-8.522 8.522Zm3.647-9.845a.774.774 0 1 1-1.096 1.096l-1.776-1.777v5.877a.775.775 0 1 1-1.55 0V8.069L7.521 9.845A.775.775 0 1 1 6.425 8.75l3.099-3.1a.775.775 0 0 1 1.096 0l3.099 3.1Z"></path>
                           </svg>
                         </span>
-                        <span className=""> {conversationRate > prevconversationRate ? "+" : "-"}  {prevconversationRate ? (conversationRate - prevconversationRate) / prevconversationRate * 100 : "100"}% </span>
+                        <span className=""> {conversationRate < prevconversationRate ? "-" : "+"}  {prevconversationRate ? (conversationRate - prevconversationRate) / prevconversationRate * 100 : "100"}% </span>
                       </div>
                     </div>
 
