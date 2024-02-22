@@ -13,8 +13,9 @@ function Report(props) {
   const startDateRef = useRef();
   const endDateRef = useRef();
 
-  const [searchQuery, setSearchQuery] = useState("campaign=" + campaignId);
-  const { data: records, isLoading } = useSearchRecordsQuery(searchQuery, campaignId);
+  const [searchQuery, setSearchQuery] = useState(campaignId ? "campaign=" + campaignId : "");
+  
+  const { data: records, isLoading } = useSearchRecordsQuery(searchQuery);
 
   const search = (e) => {
     e.preventDefault();
@@ -32,6 +33,7 @@ function Report(props) {
       urlParams.set("campaign", campaignId);
 
     const urlSearchQuery = urlParams.toString();
+
     setSearchQuery(urlSearchQuery);
   };
 
