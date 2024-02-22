@@ -86,6 +86,8 @@ function Record(props) {
           const processedData = data.map((item) => {
             const obj = {};
             function convert(str) {
+              if (str == "N/A")
+                return null
               let date = new Date(str);
               let mnth = ("0" + (date.getMonth() + 1)).slice(-2);
               let day = ("0" + date.getDate()).slice(-2);
