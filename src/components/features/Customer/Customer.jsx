@@ -25,7 +25,7 @@ function Customer() {
       .catch((e) => {
         console.log(e);
       });
-
+    location.reload()
     setShowForm(false);
   };
   const onAddUserTap = () => {
