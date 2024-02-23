@@ -122,7 +122,7 @@ function RecordForm({
                 id="activationDate"
                 type="date"
                 name="activationDate"
-                value={formData.activationDate}
+                value={formData.activationDate.slice(0, 10)}
                 className="rounded w-full  p-1 focus:shadow-outline focus:outline-none"
                 onChange={handleOnChange}
               />
@@ -211,7 +211,7 @@ function RecordForm({
               <input
                 id="bookingDate"
                 type="date"
-                value={formData.bookingDate}
+                value={formData.bookingDate.slice(0, 10)}
                 onChange={handleOnChange}
                 name="bookingDate"
                 className="rounded w-full p-1 focus:shadow-outline focus:outline-none"
