@@ -6,15 +6,16 @@ import { utils, writeFile } from "xlsx";
 import { useSearchParams } from "react-router-dom";
 
 function Report(props) {
-
-  const [searchParams] = useSearchParams()
-  const campaignId = searchParams.get("campaign")
+  const [searchParams] = useSearchParams();
+  const campaignId = searchParams.get("campaign");
   const searchTermRef = useRef();
   const startDateRef = useRef();
   const endDateRef = useRef();
 
-  const [searchQuery, setSearchQuery] = useState(campaignId ? "campaign=" + campaignId : "");
-  
+  const [searchQuery, setSearchQuery] = useState(
+    campaignId ? "campaign=" + campaignId : ""
+  );
+  const [selected, setSelected] = useState(['65d8a5e45b855336e9ac5d1c']);
   const { data: records, isLoading } = useSearchRecordsQuery(searchQuery);
 
   const search = (e) => {
@@ -28,41 +29,37 @@ function Report(props) {
 
     if (endDateRef.current.value)
       urlParams.set("endDate", endDateRef.current.value);
-    
-    if (campaignId)
-      urlParams.set("campaign", campaignId);
+
+    if (campaignId) urlParams.set("campaign", campaignId);
 
     const urlSearchQuery = urlParams.toString();
 
     setSearchQuery(urlSearchQuery);
   };
 
-  const exportFunction = useCallback(() => {
-    const exportList = [];
-
     const exportToCSV = () => {
-      console.log(exportList);
-      const worksheet = utils.json_to_sheet(exportList);
+      var sel = records.filter(e => selected.includes(e._id))
+      const worksheet = utils.json_to_sheet(sel);
       const workbook = utils.book_new();
       utils.book_append_sheet(workbook, worksheet, "Sheet1");
       writeFile(workbook, "Report.xlsx");
     };
 
-    const handleExporting = (checked, report) => {
-      if (checked) exportList.push(report);
-      else {
-        const index = exportList.findIndex((item) => item._id === records._id);
-        if (index !== -1) {
-          exportList.splice(index, 1);
-        }
-      }
-    };
 
-    return { exportToCSV, handleExporting };
-  });
-
-  const { exportToCSV, handleExporting } = exportFunction();
-
+  const handleExporting = (checked, record_id) => {
+    if (checked) {
+      setSelected([...selected, record_id]);
+    } else {
+      setSelected(selected.filter((e) => e != record_id))
+    }
+  };
+  const toggleAll = (checked) => {
+    if (checked) {
+      setSelected(records.map((e) => e._id))
+    } else {
+      setSelected([])
+    }
+  }
   return (
     <main
       className={`relative mx-2 z-20 flex h-full flex-1 flex-col overflow-y-auto overflow-x-hidden rounded-3xl rounded-t-2xl bg-slate-50 p-5 lg:rounded-s-[3rem] lg:rounded-tr-none lg:p-12 2xl:p-16 `}
@@ -121,7 +118,16 @@ function Report(props) {
                     <table className="min-w-full text-left text-sm font-light">
                       <thead className="border-b font-medium dark:border-neutral-500">
                         <tr className="">
-                          <th scope="col" className="px-6 py-4"></th>
+                          <th scope="col" className="px-6 py-4">
+                            <input
+                              id="selection-checkbox"
+                              type="checkbox"
+                              onClick={(e) => {
+                                toggleAll(e.target.checked)
+                              }}
+                              className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                            />
+                          </th>
                           <th scope="col" className="px-6 py-4">
                             Account Id
                           </th>
@@ -178,6 +184,7 @@ function Report(props) {
                             <SingleReport
                               handleExporting={handleExporting}
                               key={item._id}
+                              checked={selected.includes(item._id)}
                               report={item}
                             />
                           );
