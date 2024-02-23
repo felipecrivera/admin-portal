@@ -197,7 +197,7 @@ function Activation({}) {
 
                 <div className="grid gap-5 2xl:col-span-1">
                   <div className="rounded-xl bg-secondary/10 p-5">
-                    <div className="flex flex-wrap items-center justify-between gap-2 border-b-[3px] border-secondary/20 pb-2">
+                    <div className="items-center justify-between gap-2 border-b-[3px] border-secondary/20 pb-2">
                       <div className="relative flex items-center gap-2 before:absolute before:-bottom-[11px] before:left-0 before:h-[3px] before:w-[calc(100%+.5rem)] before:bg-secondary">
                         <span className="rounded-lg bg-accent-1 p-1 text-primary">
                           <svg
@@ -211,7 +211,12 @@ function Activation({}) {
                         </span>
                         <h6 className="text-base font-medium">Conversations</h6>
                       </div>
+                    </div>
 
+                    <div className="px-4 pt-4 lg:px-8 flex flex-row place-content-between">
+                      <h2 className="text-5xl font-medium">
+                        {noOfConversations}
+                      </h2>
                       <div className="flex items-center gap-px text-sm font-medium text-primary">
                         <span className="">
                           <svg
@@ -226,16 +231,10 @@ function Activation({}) {
                         <span className="">{noOfConversations < noOfPrevConversations ? "-" : "+"} { noOfPrevConversations ? (( noOfConversations - noOfPrevConversations) / noOfPrevConversations * 100) : "100"}% </span>
                       </div>
                     </div>
-
-                    <div className="px-4 pt-4 lg:px-8">
-                      <h2 className="text-5xl font-medium">
-                        {noOfConversations}
-                      </h2>
-                    </div>
                   </div>
 
                   <div className="rounded-xl bg-secondary/10 p-5 flex flex-col justify-between">
-                    <div className="flex flex-wrap items-center justify-between gap-2 border-b-[3px] border-secondary/20 pb-2">
+                    <div className="items-center justify-between gap-2 border-b-[3px] border-secondary/20 pb-2">
                       <div className="relative flex items-center gap-2 before:absolute before:-bottom-[11px] before:left-0 before:h-[3px] before:w-[calc(100%+.5rem)] before:bg-secondary">
                         <span className="rounded-lg bg-accent-1 p-1 text-primary">
                           <svg
@@ -252,7 +251,12 @@ function Activation({}) {
                           Conversion Rate
                         </h6>
                       </div>
+                    </div>
 
+                    <div className="px-4 pt-4 lg:px-8 flex flex-row place-content-between">
+                      <h2 className="text-5xl font-medium">
+                        {Number.parseFloat(conversationRate).toFixed(2)} %
+                      </h2>
                       <div className="flex items-center gap-px text-sm font-medium text-primary">
                         <span className="">
                           <svg
@@ -266,12 +270,6 @@ function Activation({}) {
                         </span>
                         <span className=""> {conversationRate < prevconversationRate ? "-" : "+"}  {prevconversationRate ? Number.parseFloat((conversationRate - prevconversationRate) / prevconversationRate * 100).toFixed(2) : "100"} % </span>
                       </div>
-                    </div>
-
-                    <div className="px-4 pt-4 lg:px-8">
-                      <h2 className="text-5xl font-medium">
-                        {Number.parseFloat(conversationRate).toFixed(2)} %
-                      </h2>
                     </div>
                   </div>
                 </div>
