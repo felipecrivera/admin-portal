@@ -50,7 +50,7 @@ function Booking() {
           Number.parseFloat(((dashboardData.noOfBookings / dashboardData.noOfConversations) * 100)).toFixed(2)
         );
       } else {
-        setConversationRate(0);
+        setConversationRate("0.00");
       }
 
       if (dashboardData.prevnoOfConversations !== 0) {
@@ -193,7 +193,7 @@ function Booking() {
                             <path d="M12.461 6.23v4.155a.692.692 0 1 1-1.384 0V7.902L6.72 12.259a.691.691 0 0 1-1.183-.49.693.693 0 0 1 .203-.49l4.357-4.356H7.615a.692.692 0 1 1 0-1.385h4.154a.693.693 0 0 1 .692.693ZM18 9a9 9 0 1 1-9-9 9.01 9.01 0 0 1 9 9Zm-1.385 0A7.615 7.615 0 1 0 9 16.615 7.625 7.625 0 0 0 16.615 9Z"></path>
                           </svg>
                         </span>
-                        <h6 className="text-base font-medium">Conversation</h6>
+                        <h6 className="text-base font-medium">Conversations</h6>
                       </div>
 
                       <div className="flex items-center gap-px text-sm font-medium text-primary">
