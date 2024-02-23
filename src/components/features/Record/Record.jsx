@@ -250,6 +250,12 @@ function Record(props) {
                               Outcome
                             </th>
                             <th scope="col" className="px-6 py-4">
+                              Booking Date
+                            </th>
+                            <th scope="col" className="px-6 py-4">
+                              Booking Time
+                            </th>
+                            <th scope="col" className="px-6 py-4">
                               Notes
                             </th>
                           </tr>

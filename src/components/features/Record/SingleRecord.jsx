@@ -79,6 +79,12 @@ function SingleRecord({ record }) {
           {record.outCome}
         </td>
         <td className="cursor-pointer whitespace-nowrap px-6 py-4">
+          {record.bookingDate}
+        </td>
+        <td className="cursor-pointer whitespace-nowrap px-6 py-4">
+          {record.bookingTime}
+        </td>
+        <td className="cursor-pointer whitespace-nowrap px-6 py-4">
           {record.notes}
         </td>
         <td className="whitespace-nowrap px-6 py-4">
