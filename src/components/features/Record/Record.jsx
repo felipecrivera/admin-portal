@@ -50,6 +50,7 @@ function Record(props) {
         "# of Conversations": "count",
         "Account ID": "AccountId",
         "Account Name": "AccountName",
+        "Dashboard": "dashboard"
       };
       const processedData = data.map((item) => {
         const obj = {};
