@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import Modal from "../../utils/Modal";
 import SingleRecord from "./SingleRecord";
 import { createPortal } from "react-dom";
 import RecordForm from "./RecordForm";
@@ -15,6 +16,8 @@ function Record(props) {
   const conversationFileRef = useRef();
 
   const [showForm, setShowForm] = useState(false);
+  const [showConv, setShowConv] = useState(false);
+  const [convDate, setConvDate] = useState(new Date())
 
   const { data: records, isLoading } = useGetRecordQuery();
   const [createRecord, { isLoading: isUpdating }] = useCreateRecordMutation();
@@ -25,6 +28,44 @@ function Record(props) {
 
   const onCreateRecordTap = () => {
     setShowForm(true);
+  };
+  const OnUploadConv = () => {
+    setShowConv(true);
+  };
+  const handleParseConv = (csvFile) => {
+    const reader = new FileReader();
+    reader.onload = async (event) => {
+      const wb = read(event.target.result, {
+        type: "binary",
+        cellDates: true,
+        dateNF: "dd/mm/yy",
+        cellNF: false,
+        cellText: false,
+      });
+      const sheet = wb.SheetNames[0];
+      const workSheet = wb.Sheets[sheet];
+
+      const data = utils.sheet_to_json(workSheet, { w: true });
+      const csvColumnMapping = {
+        "# of Conversations": "count",
+        "Account ID": "AccountId",
+        "Account Name": "AccountName",
+      };
+      const processedData = data.map((item) => {
+        const obj = {};
+
+        Object.keys(item).forEach((key) => {
+          obj[csvColumnMapping[key.trim()]] = item[key];
+          obj['date'] = convDate
+        });
+
+        return obj;
+      });
+      await createConversation(processedData);
+      setShowConv(false)
+    };
+
+    reader.readAsArrayBuffer(csvFile);
   };
 
   const handleParse = (e) => {
@@ -145,6 +186,63 @@ function Record(props) {
           />,
           document.getElementById("portal")
         )}
+      {showConv &&
+        createPortal(
+          <div className="absolute rounded">
+            <div className=" fixed z-30 top-0 left-0 h-[100vh] w-full bg-slate-50 opacity-70 "></div>
+            <Modal
+              title="Upload Conversations"
+              showCancel={true}
+              cancelLabel="Cancel"
+              saveLabel="Save"
+              showSave={true}
+              showLoading={isUpdating}
+              handleOnCancel={() => {
+                setShowConv(false);
+              }}
+              handleOnSave={() => {
+                handleParseConv(conversationFileRef.current.files[0]);
+              }}
+            >
+              <form className="flex gap-4 justify-center">
+                <div className="flex flex-row gap-2 justify-center">
+                  <div className="self-center my-1">
+                    <div className="mb-1">
+                      <label htmlFor="company" className=" text-white">
+                        Date
+                      </label>
+                    </div>
+                    <input
+                      id="date"
+                      type="date"
+                      name="date"
+                      value={convDate}
+                      onChange={(e) => setConvDate(e.target.value)}
+                      className="rounded  p-1 focus:shadow-outline focus:outline-none"
+                    />
+                  </div>
+                  <div className="self-center my-1">
+                    <div className="mb-1">
+                      <label htmlFor="file" className=" text-white">
+                        Select File
+                      </label>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        conversationFileRef?.current?.click();
+                      }}
+                      className="p-2 mx-2 bg-white text-[#10113A] rounded"
+                    >
+                      Upload CSV
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </Modal>
+          </div>,
+          document.getElementById("portal")
+        )}
       <main
         className={`relative z-20 flex h-full flex-1 flex-col overflow-y-auto overflow-x-hidden rounded-3xl rounded-t-2xl bg-slate-50 p-5 lg:rounded-s-[3rem] lg:rounded-tr-none lg:p-12 2xl:p-16 `}
         style={{ minHeight: "100vh" }}
@@ -163,7 +261,6 @@ function Record(props) {
           <input
             hidden
             ref={conversationFileRef}
-            onChange={handleParse}
             accept=".csv, .xlsx"
             type="file"
             name="conversationFile"
@@ -180,7 +277,7 @@ function Record(props) {
           <button
             type="button"
             onClick={() => {
-              conversationFileRef?.current?.click();
+              OnUploadConv();
             }}
             className="p-2 mx-2 bg-[#10113A] text-white rounded"
           >

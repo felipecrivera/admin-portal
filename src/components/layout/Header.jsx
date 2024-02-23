@@ -88,7 +88,7 @@ function Header() {
                   <span className="text-secondary transition group-hover:text-white">
                     <FaMoneyBillAlt />
                   </span>
-                  <span>Billings</span>
+                  <span>Billing</span>
                 </a>
               </li>
             )}
@@ -189,7 +189,7 @@ function Header() {
                     <span className="text-secondary transition group-hover:text-white">
                       <FaMoneyBillAlt />
                     </span>
-                    <span>Billings</span>
+                    <span>Billing</span>
                   </a>
                 </li>
                 <li>
